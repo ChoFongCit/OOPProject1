@@ -18,6 +18,7 @@ public class Player {
     public Player(String inName){
         score = 0;
         racket = new Rectangle(10,40);
+
         name = "Player " + inName;
     }
 

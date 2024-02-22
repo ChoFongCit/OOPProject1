@@ -26,7 +26,7 @@ public class HelloApplication extends Application {
             Player p2 = new Player("2");
             root.getChildren().add(playBall.getBall());
             Scene scene = new Scene(root, 320, 240);
-            stage.setTitle("Hello!");
+            stage.setTitle("ping pong");
             stage.setScene(scene);
             stage.show();
         }catch(Exception e){
