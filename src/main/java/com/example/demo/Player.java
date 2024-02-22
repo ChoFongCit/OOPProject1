@@ -11,28 +11,21 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Label;
 import javafx.scene.shape.*;
+import javafx.scene.paint.Color;
+import javafx.scene.canvas.GraphicsContext;
 public class Player {
-    private int score;
-    private Rectangle racket;
-    private String name;
-    public Player(String inName){
-        score = 0;
-        racket = new Rectangle(10,40);
-
-        name = "Player " + inName;
+    private double x,y,width, height, movement;
+    public Player(double x, double y, double width, double height, double dy){
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        this.movement = dy;
+    }
+    public void draw(GraphicsContext gc){
+        gc.setFill(Color.YELLOWGREEN);
+        gc.fillRect(x,y,width,height);
     }
 
-    public Rectangle getRacket() {
-        return racket;
-    }
 
-    public int getScore() {
-        return score;
-    }
-    public void setName(String inName){
-        name = inName;
-    }
-    public String getName(){
-        return name;
-    }
 }
