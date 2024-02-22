@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.controller.LabController;
 import javafx.application.Application;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -20,12 +21,11 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         try {
+            LabCanvas canvas = new LabCanvas();
             StackPane root = new StackPane();
-            Ball playBall = new Ball();
-            Player p1 = new Player("1");
-            Player p2 = new Player("2");
-            root.getChildren().add(playBall.getBall());
+            LabController labController = new LabController();
             Scene scene = new Scene(root, 320, 240);
+            root.getChildren().add(canvas);
             stage.setTitle("ping pong");
             stage.setScene(scene);
             stage.show();

@@ -9,6 +9,7 @@ public class LabCanvas extends Canvas {
         GraphicsContext gc = this.getGraphicsContext2D();
         drawBall(gc);
         drawRacket(gc);
+        drawBackground(gc);
     }
     public void drawBall(GraphicsContext gc)
     {
@@ -19,5 +20,8 @@ public class LabCanvas extends Canvas {
     {
         gc.setFill(Color.YELLOW);
         gc.fillRect(10, 200, 30,100);
+    }
+    public void drawBackground(GraphicsContext gc){
+        gc.setFill(Color.BLACK);
     }
 }
