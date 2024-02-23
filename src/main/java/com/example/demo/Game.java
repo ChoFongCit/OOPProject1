@@ -20,7 +20,15 @@ public class Game {
     public Game(){
         p1Score = 0;
         p2Score =0;
-        p1Name = "PLayer 1";
+        p1Name = "Player 1";
         p2Name = "Player 2";
+    }
+
+    public String getP1Name() {
+        return p1Name;
+    }
+
+    public String getP2Name() {
+        return p2Name;
     }
 }

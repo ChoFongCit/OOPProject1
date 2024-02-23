@@ -25,8 +25,9 @@ public class Ball {
         this.dx = dx;
         this.dy = dy;
     }
-    public Circle getBall(){
-        return ball;
+    public void setSize(int change){
+        width +=change;
+        height +=change;
     }
     public void draw(GraphicsContext gc){
         gc.setFill(Color.INDIGO);

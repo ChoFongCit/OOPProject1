@@ -15,16 +15,24 @@ import javafx.scene.paint.Color;
 import javafx.scene.canvas.GraphicsContext;
 public class Player {
     private double x,y,width, height, movement;
+    private int score;
     public Player(double x, double y, double width, double height, double dy){
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
         this.movement = dy;
+        this.score = 0;
     }
     public void draw(GraphicsContext gc){
         gc.setFill(Color.YELLOWGREEN);
         gc.fillRect(x,y,width,height);
+    }
+    public void addScore(){
+        score++;
+    }
+    public int getScore(){
+        return score;
     }
 
 
