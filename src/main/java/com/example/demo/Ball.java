@@ -33,4 +33,8 @@ public class Ball {
         gc.setFill(Color.INDIGO);
         gc.fillOval(x,y,width,height);
     }
+    public void setUpdate(double x, double y){
+        this.x = x;
+        this.y = y;
+    }
 }

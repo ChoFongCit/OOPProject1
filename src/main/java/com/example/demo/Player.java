@@ -34,6 +34,9 @@ public class Player {
     public int getScore(){
         return score;
     }
-
+    public void setUpdate(double x, double y){
+        this.x = x;
+        this.y = y;
+    }
 
 }

@@ -21,8 +21,8 @@ import javafx.scene.shape.*;
 import java.io.IOException;
 
 public class HelloApplication extends Application {
-    private static final int WIDTH = 800;
-    private static final int HEIGHT = 600;
+    private static double WIDTH = 800;
+    private static double HEIGHT = 600;
     private Ball ball;
     private Player player1, player2;
     @Override
@@ -35,22 +35,39 @@ public class HelloApplication extends Application {
             Button setSpd = new Button("SetSpd");
             Button setRacket = new Button("setRacket");
             Button setWinCondition = new Button("WinCondition");
-            HBox options = new HBox(about, exitBtn, plusBall, minusBall,setRacket,setSpd,setWinCondition);
+            Button changeNames = new Button("ChangeName");
+            HBox options = new HBox(about, exitBtn, plusBall, minusBall,setRacket,setSpd,setWinCondition,changeNames);
 
             MenuListener menu = new MenuListener();
             Game game = new Game();
-            BorderPane stem = new BorderPane();
+            StackPane stem = new StackPane();
             stage.setResizable(true);
-            LabCanvas canvas = new LabCanvas(game);
+            LabCanvas canvas = new LabCanvas(WIDTH, HEIGHT);
             StackPane root = new StackPane();
-            root.getChildren().add(canvas);
-            stem.setCenter(root);
-            stem.setTop(options);
+            stem.getChildren().add(canvas);
+
+
             Scene scene = new Scene(stem, WIDTH, HEIGHT);
 
 
             about.setOnAction(e-> menu.setAbout());
             exitBtn.setOnAction(e -> menu.setExit());
+
+            AnimationTimer gameloop = new AnimationTimer(){
+                @Override
+                public void handle(long l) {
+                    // Game logic
+//                updateGame();
+                    // Render
+                    canvas.setSize();
+                    canvas.update();
+                }
+            };
+            gameloop.start();
+            canvas.widthProperty().bind(stem.widthProperty());
+            canvas.heightProperty().bind(stem.heightProperty());
+//            canvas.widthProperty().addListener(evt -> canvas.setSize());
+//            canvas.heightProperty().addListener(evt -> canvas.setSize());
 
             stage.setTitle("pongfx");
             stage.setScene(scene);
