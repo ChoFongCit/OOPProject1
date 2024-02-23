@@ -3,6 +3,7 @@ package com.example.demo;
 import com.example.demo.controller.LabController;
 import com.example.demo.controller.MenuListener;
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -45,6 +46,8 @@ public class HelloApplication extends Application {
             LabCanvas canvas = new LabCanvas(WIDTH, HEIGHT);
             StackPane root = new StackPane();
             stem.getChildren().add(canvas);
+            stem.getChildren().add(options);
+            stem.setAlignment(options, Pos.BOTTOM_CENTER);
 
 
             Scene scene = new Scene(stem, WIDTH, HEIGHT);
