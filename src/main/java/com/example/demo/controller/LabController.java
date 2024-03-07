@@ -3,9 +3,9 @@ package com.example.demo.controller;
 import com.example.demo.Game;
 
 public class LabController {
-    private Game game = new Game();
-    public LabController(){
-
+    private Game game;
+    public LabController(Game mygame){
+        this.game = mygame;
     }
 
     public Game getGame() {

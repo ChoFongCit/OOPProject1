@@ -41,9 +41,10 @@ public class HelloApplication extends Application {
 
             MenuListener menu = new MenuListener();
             Game game = new Game();
+            LabController control = new LabController(game);
             StackPane stem = new StackPane();
             stage.setResizable(true);
-            LabCanvas canvas = new LabCanvas(WIDTH, HEIGHT);
+            LabCanvas canvas = new LabCanvas(WIDTH, HEIGHT,game);
             StackPane root = new StackPane();
             stem.getChildren().add(canvas);
             stem.getChildren().add(options);

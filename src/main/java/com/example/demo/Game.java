@@ -24,11 +24,26 @@ public class Game {
         p2Name = "Player 2";
     }
 
+    public void setP1Name(String p1Name) {
+        this.p1Name = p1Name;
+    }
+
+    public void setP2Name(String p2Name) {
+        this.p2Name = p2Name;
+    }
+
     public String getP1Name() {
         return p1Name;
     }
 
     public String getP2Name() {
         return p2Name;
+    }
+
+    public int getP1Score() {
+        return p1Score;
+    }
+    public int getP2Score(){
+        return p2Score;
     }
 }
