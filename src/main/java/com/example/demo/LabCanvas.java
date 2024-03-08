@@ -19,7 +19,7 @@ public class LabCanvas extends Canvas {
         this.game = game;
         player1 = new Player(30, height / 2 - 40, 20, 80, 5);
         player2 = new Player(width - 50, height/ 2 - 40, 20, 80, 5);
-        ball = new Ball(width / 2, height / 2, 30, 30, 5, 5);
+        ball = game.getBall();
         this.drawScore(gc);
         drawNames(gc);
         ball.draw(gc);
@@ -54,7 +54,7 @@ public class LabCanvas extends Canvas {
     public void setSize(){
 //        setWidth(this.getWidth());
 //        setHeight(height);
-        ball.setUpdate(this.getWidth() / 2, this.getHeight() / 2);
+        ball.ballUpdate(this.getWidth(), this.getHeight());
         player1.setUpdate(30, getHeight() / 2 - 40);
         player2.setUpdate(getWidth()- 50, getHeight()/ 2 - 40);
     }

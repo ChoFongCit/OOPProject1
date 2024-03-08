@@ -39,8 +39,9 @@ public class HelloApplication extends Application {
             Button changeNames = new Button("ChangeName");
             HBox options = new HBox(about, exitBtn, plusBall, minusBall,setRacket,setSpd,setWinCondition,changeNames);
 
+            ball = new Ball(WIDTH / 2, HEIGHT / 2, 30, 30, 5, 5);
             MenuListener menu = new MenuListener();
-            Game game = new Game();
+            Game game = new Game(ball);
             LabController control = new LabController(game);
             StackPane stem = new StackPane();
             stage.setResizable(true);

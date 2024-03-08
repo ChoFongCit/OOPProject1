@@ -14,14 +14,16 @@ import javafx.scene.shape.*;
 public class Game {
     private int p1Score;
     private int p2Score;
+    private Ball ball;
 
     private String p1Name;
     private String p2Name;
-    public Game(){
+    public Game(Ball ball){
         p1Score = 0;
         p2Score =0;
         p1Name = "Player 1";
         p2Name = "Player 2";
+        this.ball = ball;
     }
 
     public void setP1Name(String p1Name) {
@@ -30,6 +32,10 @@ public class Game {
 
     public void setP2Name(String p2Name) {
         this.p2Name = p2Name;
+    }
+
+    public Ball getBall() {
+        return ball;
     }
 
     public String getP1Name() {
@@ -45,5 +51,9 @@ public class Game {
     }
     public int getP2Score(){
         return p2Score;
+    }
+    private void updateGame() {
+        // Update game logic, ball movement, collision detection, etc.
+       // ball.ballUpdate();
     }
 }

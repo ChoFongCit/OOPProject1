@@ -38,5 +38,8 @@ public class Player {
         this.x = x;
         this.y = y;
     }
+    public void inputUpdate(){
+
+    }
 
 }
