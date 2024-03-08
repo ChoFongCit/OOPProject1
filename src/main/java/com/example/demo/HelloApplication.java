@@ -25,7 +25,7 @@ public class HelloApplication extends Application {
     private static double WIDTH = 800;
     private static double HEIGHT = 600;
     private Ball ball;
-    private Player player1, player2;
+//    private Player player1, player2;
     @Override
     public void start(Stage stage) throws IOException {
         try {
@@ -40,12 +40,14 @@ public class HelloApplication extends Application {
             HBox options = new HBox(about, exitBtn, plusBall, minusBall,setRacket,setSpd,setWinCondition,changeNames);
 
             ball = new Ball(WIDTH / 2, HEIGHT / 2, 30, 30, 5, 5);
+            Player player1 = new Player(30, HEIGHT / 2 - 40, 20, 80, 5);
+            Player player2 = new Player(WIDTH - 50, HEIGHT/ 2 - 40, 20, 80, 5);
             MenuListener menu = new MenuListener();
-            Game game = new Game(ball);
+            Game game = new Game(ball, player1, player2);
             LabController control = new LabController(game);
             StackPane stem = new StackPane();
             stage.setResizable(true);
-            LabCanvas canvas = new LabCanvas(WIDTH, HEIGHT,game);
+            LabCanvas canvas = new LabCanvas(WIDTH, HEIGHT,game, player1, player2);
             StackPane root = new StackPane();
             stem.getChildren().add(canvas);
             stem.getChildren().add(options);
@@ -64,8 +66,9 @@ public class HelloApplication extends Application {
                     // Game logic
 //                updateGame();
                     // Render
+                    //game.updateBallGame(WIDTH,HEIGHT);
                     canvas.setSize();
-                    canvas.update();
+                    canvas.updateView();
                 }
             };
             gameloop.start();

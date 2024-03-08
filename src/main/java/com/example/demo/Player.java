@@ -24,6 +24,23 @@ public class Player {
         this.movement = dy;
         this.score = 0;
     }
+
+    public double getWidth() {
+        return width;
+    }
+
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
     public void draw(GraphicsContext gc){
         gc.setFill(Color.YELLOWGREEN);
         gc.fillRect(x,y,width,height);

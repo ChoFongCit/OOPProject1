@@ -43,7 +43,15 @@ public class Ball {
         this.dx = dx;
     }
 
-    public void setDy(double dy) {
-        this.dy = dy;
+    public void setDy(double dy) {this.dy = dy;}
+    public void checkRacketCollisionP1(double player1X, double player1Y, double player1W, double player1H){
+        if(x <=  player1X +player1W && ((y<=(player1Y+(player1H)))&& (y>=(player1Y)))){
+            this.dx *= -1;
+        }
+    }
+    public void checkRacketCollisionP2(double player2X, double player2Y, double player2W, double player2H){
+        if(x >=  player2X - player2W && ((y<=(player2Y+(player2H)))&& (y>=(player2Y)))){
+            this.dx *= -1;
+        }
     }
 }

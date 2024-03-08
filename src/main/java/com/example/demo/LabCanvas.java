@@ -12,13 +12,13 @@ public class LabCanvas extends Canvas {
     private Game game;
     private static Font comic = new Font("Comic Sans", 30);
     private static double HEIGHT ;
-    public LabCanvas(double width, double height, Game game) {
+    public LabCanvas(double width, double height, Game game, Player player1, Player player2) {
         super(width,height-20);
         GraphicsContext gc = this.getGraphicsContext2D();
         this.drawBackground(gc);
         this.game = game;
-        player1 = new Player(30, height / 2 - 40, 20, 80, 5);
-        player2 = new Player(width - 50, height/ 2 - 40, 20, 80, 5);
+        this.player1 = player1;
+        this.player2 = player2;
         ball = game.getBall();
         this.drawScore(gc);
         drawNames(gc);
@@ -54,11 +54,13 @@ public class LabCanvas extends Canvas {
     public void setSize(){
 //        setWidth(this.getWidth());
 //        setHeight(height);
-        ball.ballUpdate(this.getWidth(), this.getHeight());
+
+//        ball.ballUpdate(this.getWidth(), this.getHeight());
         player1.setUpdate(30, getHeight() / 2 - 40);
         player2.setUpdate(getWidth()- 50, getHeight()/ 2 - 40);
+        game.updateBallGame(getWidth(),getHeight());
     }
-    public void update(){
+    public void updateView(){
         GraphicsContext gc =this.getGraphicsContext2D();
         gc.clearRect(0, 0, this.getWidth(), this.getHeight());
         drawBackground(gc);
