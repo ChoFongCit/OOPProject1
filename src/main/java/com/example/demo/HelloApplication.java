@@ -2,21 +2,17 @@ package com.example.demo;
 
 import com.example.demo.controller.LabController;
 import com.example.demo.controller.MenuListener;
+import com.example.demo.model.Ball;
+import com.example.demo.model.Game;
+import com.example.demo.model.Player;
 import javafx.application.Application;
 import javafx.geometry.Pos;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.animation.AnimationTimer;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.Label;
-import javafx.scene.shape.*;
 
 
 import java.io.IOException;
@@ -67,7 +63,7 @@ public class HelloApplication extends Application {
 //                updateGame();
                     // Render
                     //game.updateBallGame(WIDTH,HEIGHT);
-                    canvas.setSize();
+                    canvas.updateDetails();
                     canvas.updateView();
                 }
             };

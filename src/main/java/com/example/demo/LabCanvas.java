@@ -1,5 +1,8 @@
 package com.example.demo;
 
+import com.example.demo.model.Ball;
+import com.example.demo.model.Game;
+import com.example.demo.model.Player;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -51,7 +54,7 @@ public class LabCanvas extends Canvas {
         gc.setFill(Color.BLACK);
         gc.fillRect(0,0,getWidth(),getHeight());
     }
-    public void setSize(){
+    public void updateDetails(){
 //        setWidth(this.getWidth());
 //        setHeight(height);
 

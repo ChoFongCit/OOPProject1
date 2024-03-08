@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.model;
 
 import javafx.application.Application;
 import javafx.scene.canvas.GraphicsContext;

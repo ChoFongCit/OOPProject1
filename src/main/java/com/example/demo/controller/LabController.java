@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.Game;
+import com.example.demo.model.Game;
 
 public class LabController {
     private Game game;
