@@ -5,6 +5,7 @@ import com.example.demo.controller.MenuListener;
 import com.example.demo.model.Ball;
 import com.example.demo.model.Game;
 import com.example.demo.model.Player;
+import com.example.demo.view.LabCanvas;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.layout.StackPane;
@@ -40,10 +41,11 @@ public class HelloApplication extends Application {
             Player player2 = new Player(WIDTH - 50, HEIGHT/ 2 - 40, 20, 80, 5);
             MenuListener menu = new MenuListener();
             Game game = new Game(ball, player1, player2);
-            LabController control = new LabController(game);
+
             StackPane stem = new StackPane();
             stage.setResizable(true);
             LabCanvas canvas = new LabCanvas(WIDTH, HEIGHT,game, player1, player2);
+            LabController control = new LabController(game,canvas);
             StackPane root = new StackPane();
             stem.getChildren().add(canvas);
             stem.getChildren().add(options);
@@ -55,19 +57,7 @@ public class HelloApplication extends Application {
 
             about.setOnAction(e-> menu.setAbout());
             exitBtn.setOnAction(e -> menu.setExit());
-
-            AnimationTimer gameloop = new AnimationTimer(){
-                @Override
-                public void handle(long l) {
-                    // Game logic
-//                updateGame();
-                    // Render
-                    //game.updateBallGame(WIDTH,HEIGHT);
-                    canvas.updateDetails();
-                    canvas.updateView();
-                }
-            };
-            gameloop.start();
+            control.startLoop();
             canvas.widthProperty().bind(stem.widthProperty());
             canvas.heightProperty().bind(stem.heightProperty());
 //            canvas.widthProperty().addListener(evt -> canvas.setSize());
