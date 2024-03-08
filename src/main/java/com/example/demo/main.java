@@ -1,24 +1,23 @@
 package com.example.demo;
 
-import com.example.demo.controller.LabController;
+import com.example.demo.controller.PongController;
 import com.example.demo.controller.MenuListener;
 import com.example.demo.model.Ball;
 import com.example.demo.model.Game;
 import com.example.demo.model.Player;
-import com.example.demo.view.LabCanvas;
+import com.example.demo.view.view;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-import javafx.animation.AnimationTimer;
 import javafx.scene.layout.HBox;
 import javafx.scene.control.Button;
 
 
 import java.io.IOException;
 
-public class HelloApplication extends Application {
+public class main extends Application {
     private static double WIDTH = 800;
     private static double HEIGHT = 600;
     private Ball ball;
@@ -44,9 +43,9 @@ public class HelloApplication extends Application {
 
             StackPane stem = new StackPane();
             stage.setResizable(true);
-            LabCanvas canvas = new LabCanvas(WIDTH, HEIGHT,game, player1, player2);
-            LabController control = new LabController(game,canvas);
-            StackPane root = new StackPane();
+            view canvas = new view(WIDTH, HEIGHT,game, player1, player2);
+            PongController control = new PongController(game,canvas);
+//            StackPane root = new StackPane();
             stem.getChildren().add(canvas);
             stem.getChildren().add(options);
             stem.setAlignment(options, Pos.BOTTOM_CENTER);
@@ -57,7 +56,6 @@ public class HelloApplication extends Application {
 
             about.setOnAction(e-> menu.setAbout());
             exitBtn.setOnAction(e -> menu.setExit());
-            control.startLoop();
             canvas.widthProperty().bind(stem.widthProperty());
             canvas.heightProperty().bind(stem.heightProperty());
 //            canvas.widthProperty().addListener(evt -> canvas.setSize());

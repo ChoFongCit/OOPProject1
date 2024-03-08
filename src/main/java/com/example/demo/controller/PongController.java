@@ -1,15 +1,15 @@
 package com.example.demo.controller;
 
-import com.example.demo.view.LabCanvas;
 import com.example.demo.model.Game;
 import javafx.animation.AnimationTimer;
 
-public class LabController {
+public class PongController {
     private Game game;
-    private LabCanvas view;
-    public LabController(Game mygame, LabCanvas view){
+    private com.example.demo.view.view view;
+    public PongController(Game mygame, com.example.demo.view.view view){
         this.game = mygame;
         this.view = view;
+        startLoop();
     }
 
     public Game getGame() {
@@ -19,7 +19,7 @@ public class LabController {
     public void setGame(Game game) {
         this.game = game;
     }
-    public void startLoop(){
+    private void startLoop(){
         AnimationTimer gameloop = new AnimationTimer(){
             @Override
             public void handle(long l) {
@@ -32,5 +32,8 @@ public class LabController {
             }
         };
         gameloop.start();
+    }
+    private void initControls(){
+
     }
 }
