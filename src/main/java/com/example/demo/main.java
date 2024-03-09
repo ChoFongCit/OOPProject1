@@ -1,11 +1,12 @@
 package com.example.demo;
 
+import com.example.demo.controller.KeyboardListener;
 import com.example.demo.controller.PongController;
 import com.example.demo.controller.MenuListener;
 import com.example.demo.model.Ball;
 import com.example.demo.model.Game;
 import com.example.demo.model.Player;
-import com.example.demo.view.view;
+import com.example.demo.view.View;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.layout.StackPane;
@@ -36,22 +37,28 @@ public class main extends Application {
             HBox options = new HBox(about, exitBtn, plusBall, minusBall,setRacket,setSpd,setWinCondition,changeNames);
 
             ball = new Ball(WIDTH / 2, HEIGHT / 2, 30, 30, 5, 5);
-            Player player1 = new Player(30, HEIGHT / 2 - 40, 20, 80, 5);
-            Player player2 = new Player(WIDTH - 50, HEIGHT/ 2 - 40, 20, 80, 5);
+            Player player1 = new Player(30, HEIGHT / 2 - 40, 20, 80, 10);
+            Player player2 = new Player(WIDTH - 50, HEIGHT/ 2 - 40, 20, 80, 10);
             MenuListener menu = new MenuListener();
+
             Game game = new Game(ball, player1, player2);
 
             StackPane stem = new StackPane();
             stage.setResizable(true);
-            view canvas = new view(WIDTH, HEIGHT,game, player1, player2);
-            PongController control = new PongController(game,canvas);
+            View canvas = new View(WIDTH, HEIGHT,game, player1, player2);
+            Scene scene = new Scene(stem, WIDTH, HEIGHT);
+            PongController control = new PongController(game,canvas,scene);
+            KeyboardListener keyboardListener = new KeyboardListener(game,canvas);
+            canvas.setOnKeyPressed(keyboardListener);
+            canvas.setOnKeyPressed(keyboardListener);
+            canvas.setFocusTraversable(true);
 //            StackPane root = new StackPane();
             stem.getChildren().add(canvas);
             stem.getChildren().add(options);
             stem.setAlignment(options, Pos.BOTTOM_CENTER);
 
 
-            Scene scene = new Scene(stem, WIDTH, HEIGHT);
+
 
 
             about.setOnAction(e-> menu.setAbout());

@@ -43,7 +43,16 @@ public class Game {
     public int getP2Score(){
         return p2Score;
     }
-    public void updateBallGame(double windowWidth,double windowHeight) {
+
+    public Player getPlayer1() {
+        return player1;
+    }
+
+    public Player getPlayer2() {
+        return player2;
+    }
+
+    public void updateBallGame(double windowWidth, double windowHeight) {
         ball.ballUpdate(windowWidth, windowHeight);
         ball.checkRacketCollisionP1(player1.getX(), player1.getY(), player1.getWidth(), player1.getHeight());
         ball.checkRacketCollisionP2(player2.getX(), player2.getY(), player2.getWidth(), player2.getHeight());

@@ -58,5 +58,11 @@ public class Player {
     public void inputUpdate(){
 
     }
+    public void upMove(){
+        this.y += movement;
+    }
+    public void downMove(){
+        this.y += -movement;
+    }
 
 }

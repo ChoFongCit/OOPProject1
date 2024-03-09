@@ -8,14 +8,14 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
-public class view extends Canvas {
+public class View extends Canvas {
     private static double Width ;
     private Player player1, player2;
     private Ball ball;
     private Game game;
     private static Font comic = new Font("Comic Sans", 30);
     private static double HEIGHT ;
-    public view(double width, double height, Game game, Player player1, Player player2) {
+    public View(double width, double height, Game game, Player player1, Player player2) {
         super(width,height-20);
         GraphicsContext gc = this.getGraphicsContext2D();
         this.drawBackground(gc);
@@ -59,8 +59,8 @@ public class view extends Canvas {
 //        setHeight(height);
 
 //        ball.ballUpdate(this.getWidth(), this.getHeight());
-        player1.setUpdate(30, getHeight() / 2 - 40);
-        player2.setUpdate(getWidth()- 50, getHeight()/ 2 - 40);
+        player1.setUpdate(30, player1.getY());
+        player2.setUpdate(getWidth()- 50, player2.getY());
         game.updateBallGame(getWidth(),getHeight());
     }
     public void updateView(){
