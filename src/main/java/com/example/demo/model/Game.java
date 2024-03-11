@@ -56,5 +56,19 @@ public class Game {
         ball.ballUpdate(windowWidth, windowHeight);
         ball.checkRacketCollisionP1(player1.getX(), player1.getY(), player1.getWidth(), player1.getHeight());
         ball.checkRacketCollisionP2(player2.getX(), player2.getY(), player2.getWidth(), player2.getHeight());
+        if(ball.checkP1Goal(player2.getX(), player2.getWidth())){
+            p1Score++;
+            ball.setX(windowWidth/2);
+            ball.setY(windowHeight/2);
+            ball.setDx(-5);
+            System.out.println("player1goal");
+        }
+        if(ball.checkP2Goal(player1.getX(),player1.getWidth())){
+            p2Score++;
+            ball.setX(windowWidth/2);
+            ball.setY(windowHeight/2);
+            ball.setDx(5);
+            System.out.println("player2balls");
+        }
     }
 }

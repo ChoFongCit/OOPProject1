@@ -19,11 +19,17 @@ public class KeyboardListener implements EventHandler<KeyEvent> {
     public void handle(KeyEvent keyEvent) {
         System.out.println(keyEvent);
         KeyCode key = keyEvent.getCode();
-        switch (key){
-            case UP:game.getPlayer2().upMove();break;
-            case DOWN:game.getPlayer2().downMove();break;
-            case W:game.getPlayer1().upMove();break;
-            case S:game.getPlayer1().downMove();break;
+        if(KeyCode.UP.equals(key)){
+            game.getPlayer2().upMove();
+        }
+        if(KeyCode.DOWN.equals(key)){
+            game.getPlayer2().downMove();
+        }
+        if(KeyCode.W.equals(key)){
+            game.getPlayer1().upMove();
+        }
+        if(KeyCode.S.equals(key)){
+            game.getPlayer1().downMove();
         }
     }
 }

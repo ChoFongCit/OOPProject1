@@ -15,7 +15,8 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.Label;
 import javafx.scene.shape.*;
 public class Ball {
-    private Circle ball;
+
+
     private double x, y, dx, dy, width, height;
     public Ball(double x, double y, double width, double height, double dx, double dy){
         this.x = x;
@@ -43,6 +44,13 @@ public class Ball {
         this.dx = dx;
     }
 
+    public void setX(double x) {
+        this.x = x;
+    }
+    public void setY(double y){
+        this.y = y;
+    }
+
     public void setDy(double dy) {this.dy = dy;}
     public void checkRacketCollisionP1(double player1X, double player1Y, double player1W, double player1H){
         if(x <=  player1X +player1W && ((y<=(player1Y+(player1H)))&& (y>=(player1Y)))){
@@ -53,5 +61,11 @@ public class Ball {
         if(x >=  player2X - player2W && ((y<=(player2Y+(player2H)))&& (y>=(player2Y)))){
             this.dx *= -1;
         }
+    }
+    public boolean checkP1Goal(double player2X, double player2W){
+        return(this.x >= player2X + player2W);
+    }
+    public boolean checkP2Goal(double player1X, double player1W){
+        return(this.x<= player1X-player1W);
     }
 }

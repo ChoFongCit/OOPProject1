@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.controller.BallManager;
 import com.example.demo.controller.KeyboardListener;
 import com.example.demo.controller.PongController;
 import com.example.demo.controller.MenuListener;
@@ -47,19 +48,24 @@ public class main extends Application {
             stage.setResizable(true);
             View canvas = new View(WIDTH, HEIGHT,game, player1, player2);
             Scene scene = new Scene(stem, WIDTH, HEIGHT);
-            PongController control = new PongController(game,canvas,scene);
+
             KeyboardListener keyboardListener = new KeyboardListener(game,canvas);
+
             canvas.setOnKeyPressed(keyboardListener);
-            canvas.setOnKeyPressed(keyboardListener);
+            canvas.setOnKeyTyped(keyboardListener);
             canvas.setFocusTraversable(true);
+
 //            StackPane root = new StackPane();
             stem.getChildren().add(canvas);
             stem.getChildren().add(options);
             stem.setAlignment(options, Pos.BOTTOM_CENTER);
 
+            BallManager ballManager = new BallManager(game,canvas);
+            PongController control = new PongController(game,canvas,ballManager);
+            Thread ballThread = new Thread(ballManager);
+            ballThread.start();
 
-
-
+            Thread.yield();
 
             about.setOnAction(e-> menu.setAbout());
             exitBtn.setOnAction(e -> menu.setExit());

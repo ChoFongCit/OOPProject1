@@ -57,13 +57,12 @@ public class View extends Canvas {
     public void updateDetails(){
 //        setWidth(this.getWidth());
 //        setHeight(height);
-
 //        ball.ballUpdate(this.getWidth(), this.getHeight());
-        player1.setUpdate(30, player1.getY());
-        player2.setUpdate(getWidth()- 50, player2.getY());
         game.updateBallGame(getWidth(),getHeight());
     }
     public void updateView(){
+        player1.setUpdate(30, player1.getY());
+        player2.setUpdate(getWidth()- 50, player2.getY());
         GraphicsContext gc =this.getGraphicsContext2D();
         gc.clearRect(0, 0, this.getWidth(), this.getHeight());
         drawBackground(gc);

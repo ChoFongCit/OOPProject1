@@ -59,10 +59,10 @@ public class Player {
 
     }
     public void upMove(){
-        this.y += movement;
+        this.y += -movement;
     }
     public void downMove(){
-        this.y += -movement;
+        this.y += movement;
     }
 
 }
