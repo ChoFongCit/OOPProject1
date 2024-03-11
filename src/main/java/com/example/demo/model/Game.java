@@ -1,9 +1,13 @@
 package com.example.demo.model;
 
+import com.example.demo.controller.BallManager;
+
 public class Game {
     private int p1Score;
     private int p2Score;
     private Ball ball;
+    private double windowWidth;
+    private double windowHeight;
 
     private String p1Name;
     private String p2Name;
@@ -17,6 +21,7 @@ public class Game {
         this.ball = ball;
         this.player1 = player1;
         this.player2 =player2;
+
     }
 
     public void setP1Name(String p1Name) {
@@ -54,21 +59,44 @@ public class Game {
 
     public void updateBallGame(double windowWidth, double windowHeight) {
         ball.ballUpdate(windowWidth, windowHeight);
+        this.windowHeight = windowHeight;
+        this.windowWidth = windowWidth;
         ball.checkRacketCollisionP1(player1.getX(), player1.getY(), player1.getWidth(), player1.getHeight());
         ball.checkRacketCollisionP2(player2.getX(), player2.getY(), player2.getWidth(), player2.getHeight());
+//        if(ball.checkP1Goal(player2.getX(), player2.getWidth())){
+//            p1Score++;
+//            ball.setX(windowWidth/2);
+//            ball.setY(windowHeight/2);
+//            ball.setDx(-5);
+//            System.out.println("player1goal");
+//        }
+//        if(ball.checkP2Goal(player1.getX(),player1.getWidth())){
+//            p2Score++;
+//            ball.setX(windowWidth/2);
+//            ball.setY(windowHeight/2);
+//            ball.setDx(5);
+//            System.out.println("player2balls");
+//        }
+//        checkGoal();
+    }
+    public int checkGoal(){
+        int side = 0;
         if(ball.checkP1Goal(player2.getX(), player2.getWidth())){
             p1Score++;
             ball.setX(windowWidth/2);
             ball.setY(windowHeight/2);
-            ball.setDx(-5);
+            ball.setDx(-1);
             System.out.println("player1goal");
+            side = 1;
         }
-        if(ball.checkP2Goal(player1.getX(),player1.getWidth())){
+        else if(ball.checkP2Goal(player1.getX(),player1.getWidth())){
             p2Score++;
             ball.setX(windowWidth/2);
             ball.setY(windowHeight/2);
-            ball.setDx(5);
-            System.out.println("player2balls");
+            ball.setDx(1);
+            System.out.println("player2goals");
+            side = 2;
         }
+        return side;
     }
 }

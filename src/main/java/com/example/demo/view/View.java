@@ -72,4 +72,10 @@ public class View extends Canvas {
         player1.draw(gc);
         player2.draw(gc);
     }
+    public void ScoreMessage(String name){
+        GraphicsContext gc = this.getGraphicsContext2D();
+        gc.setFill(Color.WHITE);
+        gc.setFont(comic);
+        gc.fillText(name +" Scored",getWidth()/2 ,getHeight()/2 - 50);
+    }
 }
