@@ -17,10 +17,6 @@ public class PongController implements Runnable{
     public Game getGame() {
         return game;
     }
-//    public void setPausedPaused(boolean toggle, String message){
-//        System.out.println(message);
-//        isPaused = toggle;
-//    }
     public void setPausedPaused(boolean toggle){
         isPaused = toggle;
     }
@@ -45,14 +41,6 @@ public class PongController implements Runnable{
             catch(InterruptedException e){
                 throw new RuntimeException(e);
             }
-//            if(game.checkGoal() == 1){
-//                setPausedPaused(true);
-//                scoreMessage = game.getP1Name();
-//            }
-//             if(game.checkGoal() == 2){
-//                setPausedPaused(true);
-//                scoreMessage = game.getP2Name();
-//            }
              switch (game.checkGoal()){
                  case 1:
                      setPausedPaused(true);

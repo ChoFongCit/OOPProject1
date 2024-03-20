@@ -64,7 +64,7 @@ public class main extends Application {
             Thread ballThread = new Thread(control);
             ballThread.start();
 
-            Thread.yield();
+            ballThread.yield();
 
             about.setOnAction(e-> menu.setAbout());
             exitBtn.setOnAction(e -> menu.setExit());
