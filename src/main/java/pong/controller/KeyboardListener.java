@@ -1,10 +1,12 @@
-package com.example.demo.controller;
+package pong.controller;
 
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import com.example.demo.model.*;
 import com.example.demo.view.*;
+import pong.model.Game;
+import pong.view.View;
 
 public class KeyboardListener implements EventHandler<KeyEvent> {
     private Game game;

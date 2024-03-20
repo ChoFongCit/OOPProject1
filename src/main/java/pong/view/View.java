@@ -1,8 +1,8 @@
-package com.example.demo.view;
+package pong.view;
 
-import com.example.demo.model.Ball;
-import com.example.demo.model.Game;
-import com.example.demo.model.Player;
+import pong.model.Ball;
+import pong.model.Game;
+import pong.model.Player;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;

@@ -1,10 +1,7 @@
-package com.example.demo.controller;
+package pong.controller;
 
-import com.example.demo.model.Ball;
-import com.example.demo.model.Game;
-import com.example.demo.view.View;
-import javafx.animation.AnimationTimer;
-import javafx.scene.Scene;
+import pong.model.Game;
+import pong.view.View;
 
 public class PongController implements Runnable{
     private Game game;

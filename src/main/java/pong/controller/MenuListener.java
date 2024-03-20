@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package pong.controller;
 
 import javafx.application.Platform;
 import javafx.scene.control.Alert;

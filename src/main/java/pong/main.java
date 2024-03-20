@@ -1,13 +1,12 @@
-package com.example.demo;
+package pong;
 
-import com.example.demo.controller.BallManager;
-import com.example.demo.controller.KeyboardListener;
-import com.example.demo.controller.PongController;
-import com.example.demo.controller.MenuListener;
-import com.example.demo.model.Ball;
-import com.example.demo.model.Game;
-import com.example.demo.model.Player;
-import com.example.demo.view.View;
+import pong.controller.KeyboardListener;
+import pong.controller.PongController;
+import pong.controller.MenuListener;
+import pong.model.Ball;
+import pong.model.Game;
+import pong.model.Player;
+import pong.view.View;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.layout.StackPane;

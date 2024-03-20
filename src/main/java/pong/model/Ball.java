@@ -1,4 +1,4 @@
-package com.example.demo.model;
+package pong.model;
 
 import javafx.application.Application;
 import javafx.scene.canvas.GraphicsContext;

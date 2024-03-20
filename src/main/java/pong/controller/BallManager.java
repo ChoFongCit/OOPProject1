@@ -1,8 +1,7 @@
-package com.example.demo.controller;
+package pong.controller;
 
-import com.example.demo.model.Ball;
-import com.example.demo.model.Game;
-import com.example.demo.view.View;
+import pong.model.Game;
+import pong.view.View;
 
 public class BallManager implements Runnable {
     private Game game;

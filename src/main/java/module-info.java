@@ -10,12 +10,12 @@ module com.example.demo {
             requires org.kordamp.bootstrapfx.core;
             requires com.almasb.fxgl.all;
     
-    opens com.example.demo to javafx.fxml;
-    exports com.example.demo;
-    exports com.example.demo.controller;
-    opens com.example.demo.controller to javafx.fxml;
-    exports com.example.demo.model;
-    opens com.example.demo.model to javafx.fxml;
-    exports com.example.demo.view;
-    opens com.example.demo.view to javafx.fxml;
+    opens pong to javafx.fxml;
+    exports pong;
+    exports pong.controller;
+    opens pong.controller to javafx.fxml;
+    exports pong.model;
+    opens pong.model to javafx.fxml;
+    exports pong.view;
+    opens pong.view to javafx.fxml;
 }

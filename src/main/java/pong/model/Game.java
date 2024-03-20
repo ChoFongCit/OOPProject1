@@ -1,6 +1,4 @@
-package com.example.demo.model;
-
-import com.example.demo.controller.BallManager;
+package pong.model;
 
 public class Game {
     private int p1Score;
