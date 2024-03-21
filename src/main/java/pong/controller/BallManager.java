@@ -12,10 +12,10 @@ public class BallManager implements Runnable {
         this.game = game;
         this.view = view;
     }
-    public void setPausedPaused(boolean toggle, String message){
-        System.out.println(message);
-        isPaused = toggle;
-    }
+//    public void setPausedPaused(boolean toggle, String message){
+//        System.out.println(message);
+//        isPaused = toggle;
+//    }
     public void setPausedPaused(boolean toggle){
         isPaused = toggle;
     }
@@ -40,8 +40,6 @@ public class BallManager implements Runnable {
         catch(InterruptedException e){
             throw new RuntimeException(e);
     }
-
-        view.updateDetails();
         view.updateView();
     }
     }

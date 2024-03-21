@@ -17,28 +17,25 @@ import javafx.scene.shape.*;
 public class Ball {
 
 
-    private double x, y, dx, dy, width, height;
-    public Ball(double x, double y, double width, double height, double dx, double dy){
+    private double x, y, dx, dy, radius;
+    public Ball(double x, double y, double radius, double dx, double dy){
         this.x = x;
         this.y = y;
-        this.width = width;
-        this.height = height;
+        this.radius = radius;
         this.dx = dx;
         this.dy = dy;
     }
     public void setSize(int change){
-        width +=change;
-        height +=change;
+        radius+=change;
     }
     public void draw(GraphicsContext gc){
         gc.setFill(Color.INDIGO);
-        gc.fillOval(x,y,width,height);
+        gc.fillOval(x,y,radius, radius);
     }
     public void ballUpdate(double windowWidth, double windowHeight){
         this.x += dx;
         this.y += dy;
-        if (x < 0 || x > windowWidth) dx *= -1;
-        if (y < 0 || y > windowHeight) dy *= -1;
+        if (y-radius < 0 || y+radius > windowHeight) dy *= -1;
     }
     public void setDx(double dx){
         this.dx = dx;
@@ -50,15 +47,21 @@ public class Ball {
     public void setY(double y){
         this.y = y;
     }
+    public double getX(){return this.x;}
+
+    public double getY() {
+        return y;
+    }
+
 
     public void setDy(double dy) {this.dy = dy;}
     public void checkRacketCollisionP1(double player1X, double player1Y, double player1W, double player1H){
-        if(x <=  player1X +player1W && ((y<=(player1Y+(player1H)))&& (y>=(player1Y)))){
+        if(((x-radius/2)) <=  player1X +player1W && ((y<=(player1Y+(player1H)))&& (y>=(player1Y)))){
             this.dx *= -1;
         }
     }
     public void checkRacketCollisionP2(double player2X, double player2Y, double player2W, double player2H){
-        if(x >=  player2X - player2W && ((y<=(player2Y+(player2H)))&& (y>=(player2Y)))){
+        if((x+(radius/2)) >=  player2X - player2W && ((y<=(player2Y+(player2H)))&& (y>=(player2Y)))){
             this.dx *= -1;
         }
     }

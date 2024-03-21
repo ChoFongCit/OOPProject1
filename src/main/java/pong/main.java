@@ -36,12 +36,12 @@ public class main extends Application {
             Button changeNames = new Button("ChangeName");
             HBox options = new HBox(about, exitBtn, plusBall, minusBall,setRacket,setSpd,setWinCondition,changeNames);
 
-            ball = new Ball(WIDTH / 2, HEIGHT / 2, 30, 30, -1, 1);
+            ball = new Ball(WIDTH / 2, HEIGHT / 2, 30, -1, 1);
             Player player1 = new Player(30, HEIGHT / 2 - 40, 20, 80, 10);
             Player player2 = new Player(WIDTH - 50, HEIGHT/ 2 - 40, 20, 80, 10);
-            MenuListener menu = new MenuListener();
-
             Game game = new Game(ball, player1, player2);
+
+            MenuListener menu = new MenuListener(game);
 
             StackPane stem = new StackPane();
             stage.setResizable(true);

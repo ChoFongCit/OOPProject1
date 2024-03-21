@@ -10,6 +10,7 @@ public class Game {
     private String p2Name;
     private Player player1;
     private Player player2;
+    private int scorelimit;
     public Game(Ball ball, Player player1, Player player2){
         p1Score = 0;
         p2Score =0;
@@ -31,6 +32,14 @@ public class Game {
 
     public Ball getBall() {
         return ball;
+    }
+
+    public int getScorelimit() {
+        return scorelimit;
+    }
+
+    public void setScorelimit(int scorelimit) {
+        this.scorelimit = scorelimit;
     }
 
     public String getP1Name() {

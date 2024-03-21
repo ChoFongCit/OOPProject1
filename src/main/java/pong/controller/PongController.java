@@ -11,13 +11,8 @@ public class PongController implements Runnable{
     public PongController(Game game, View view){
         this.game = game;
         this.view = view;
-//        startLoop(scene);
     }
-
-    public Game getGame() {
-        return game;
-    }
-    public void setPausedPaused(boolean toggle){
+    public void setPaused(boolean toggle){
         isPaused = toggle;
     }
     @Override
@@ -27,32 +22,33 @@ public class PongController implements Runnable{
         {
             if(isPaused){
                 try{
-                    view.ScoreMessage(scoreMessage);
-                    Thread.sleep(3000);     //stops for 3 seconds
-                    setPausedPaused(false);
-                }catch (InterruptedException e){
 
+                    Thread.sleep(1);     //stops for 3 seconds
+
+                }catch (InterruptedException e){
                 }
             }
-
             try{
                 Thread.sleep(10);
+                switch (game.checkGoal()){
+                    case 1:
+
+                        scoreMessage = game.getP1Name();
+                        view.ScoreMessage(scoreMessage);
+                        Thread.sleep(3000);
+                        break;
+                    case 2:
+                        scoreMessage = game.getP2Name();
+                        view.ScoreMessage(scoreMessage);
+                        Thread.sleep(3000);
+                        break;
+                }
             }
             catch(InterruptedException e){
                 throw new RuntimeException(e);
             }
-             switch (game.checkGoal()){
-                 case 1:
-                     setPausedPaused(true);
-                     scoreMessage = game.getP1Name();
-                     break;
-                 case 2:
-                     setPausedPaused(true);
-                     scoreMessage = game.getP2Name();
-                     break;
-             }
 
-            view.updateDetails();
+            game.updateBallGame(view.getWidth(),view.getHeight());
             view.updateView();
         }
     }

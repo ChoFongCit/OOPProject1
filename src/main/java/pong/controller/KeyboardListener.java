@@ -31,5 +31,6 @@ public class KeyboardListener implements EventHandler<KeyEvent> {
         if(KeyCode.S.equals(key)){
             game.getPlayer1().downMove();
         }
+        view.updateView();
     }
 }

@@ -14,14 +14,15 @@ public class View extends Canvas {
     private Ball ball;
     private Game game;
     private static Font comic = new Font("Comic Sans", 30);
+    private GraphicsContext gc;
     private static double HEIGHT ;
     public View(double width, double height, Game game, Player player1, Player player2) {
         super(width,height-20);
-        GraphicsContext gc = this.getGraphicsContext2D();
+        gc = this.getGraphicsContext2D();
         this.drawBackground(gc);
         this.game = game;
-        this.player1 = player1;
-        this.player2 = player2;
+        this.player1 = game.getPlayer1();
+        this.player2 = game.getPlayer2();
         ball = game.getBall();
         this.drawScore(gc);
         drawNames(gc);
@@ -43,6 +44,8 @@ public class View extends Canvas {
         gc.setFill(Color.WHITE);
         gc.setFont(comic);
         gc.fillText(game.getP1Name()+"\t\t"+game.getP2Name(), getWidth()/2 -100,getHeight()/2);
+    }
+    public void drawPlayer1(){
 
     }
     public void drawScore(GraphicsContext gc){
@@ -54,16 +57,11 @@ public class View extends Canvas {
         gc.setFill(Color.BLACK);
         gc.fillRect(0,0,getWidth(),getHeight());
     }
-    public void updateDetails(){
-//        setWidth(this.getWidth());
-//        setHeight(height);
-//        ball.ballUpdate(this.getWidth(), this.getHeight());
-        game.updateBallGame(getWidth(),getHeight());
-    }
+
     public void updateView(){
         player1.setUpdate(30, player1.getY());
         player2.setUpdate(getWidth()- 50, player2.getY());
-        GraphicsContext gc =this.getGraphicsContext2D();
+        GraphicsContext gc = this.getGraphicsContext2D();
         gc.clearRect(0, 0, this.getWidth(), this.getHeight());
         drawBackground(gc);
         drawScore(gc);
