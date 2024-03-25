@@ -63,11 +63,11 @@ public class main extends Application {
             PongController control = new PongController(game,canvas);
             Thread ballThread = new Thread(control);
             ballThread.start();
-
-            ballThread.yield();
+            Thread.yield();
 
             about.setOnAction(e-> menu.setAbout());
             exitBtn.setOnAction(e -> menu.setExit());
+            setWinCondition.setOnAction(event -> menu.setGameLimit());
             canvas.widthProperty().bind(stem.widthProperty());
             canvas.heightProperty().bind(stem.heightProperty());
 //            canvas.widthProperty().addListener(evt -> canvas.setSize());

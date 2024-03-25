@@ -6,7 +6,8 @@ import pong.view.View;
 public class PongController implements Runnable{
     private Game game;
     private View view;
-    private boolean isPaused = true;
+    private volatile boolean isPaused = true;
+    private final Object pauseLock = new Object();
     private String scoreMessage;
     public PongController(Game game, View view){
         this.game = game;

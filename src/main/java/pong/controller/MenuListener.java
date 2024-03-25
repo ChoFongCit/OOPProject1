@@ -34,7 +34,6 @@ public class MenuListener {
         TextInputDialog dialog = new TextInputDialog(); // create an instance
         dialog.setTitle("Title");
         Optional<String> result = dialog.showAndWait();
-
         result.ifPresent(string -> {
             game.setScorelimit(Integer.parseInt(result.get()));
         });
