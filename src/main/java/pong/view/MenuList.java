@@ -6,6 +6,10 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import pong.controller.MenuListener;
 
+/**
+ * This class extends MenuBar and is used to store Menu and its MenuItems
+ * Used to encapsulate the menu options from the gameplay rendering
+ */
 public class MenuList extends MenuBar {
         Menu optionlist = new Menu("Options");
         Menu gameSettings = new Menu("Game settings");
@@ -20,12 +24,19 @@ public class MenuList extends MenuBar {
         MenuItem ballBounce = new MenuItem("Bounce");
         MenuItem player1Name = new MenuItem("Player1 Name");
         MenuItem player2Name = new MenuItem("Player2 Name");
+        MenuItem save = new MenuItem("save");
+        MenuItem load = new MenuItem("load");
 
         MenuListener listen;
-
+    /**
+     * Constructs a MenuBar object with the Menu and MenuItem objects declared above
+     *
+     * @param menuListener listener class for menu items
+     * @return an instance of MenuList
+     */
         public MenuList(MenuListener menuListener){
             super();
-            optionlist.getItems().addAll(exitBtn,about,pause,resetGame,resume);
+            optionlist.getItems().addAll(about,pause,save,load,resetGame,resume,exitBtn );
             gameSettings.getItems().addAll(setWinCondition,changeNames,ballSpeed,ballBounce,player1Name,player2Name);
             this.getMenus().addAll(optionlist,gameSettings);
             this.listen = menuListener;
@@ -39,5 +50,7 @@ public class MenuList extends MenuBar {
             ballSpeed.setOnAction(event -> menuListener.setBallspd());
             player1Name.setOnAction(event -> menuListener.setp1Name());
             player2Name.setOnAction(event -> menuListener.setp2Name());
+            save.setOnAction(event -> menuListener.saveState());
+            load.setOnAction(event -> menuListener.loadState());
         }
 }

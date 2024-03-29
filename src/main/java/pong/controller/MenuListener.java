@@ -5,6 +5,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextInputDialog;
 import pong.model.Game;
 
+import java.io.File;
 import java.util.Optional;
 
 public class MenuListener {
@@ -34,6 +35,9 @@ public class MenuListener {
         pongController.resume();
     }
 
+    /**
+     * sets the score limit of the game
+     */
     public void setGameLimit() {
         pongController.setPaused();
         TextInputDialog dialog = new TextInputDialog();
@@ -61,12 +65,21 @@ public class MenuListener {
             pongController.resume();
         });
     }
+    /**
+     * calls the pongController to pause the game
+     */
     public void pauseGame(){
         pongController.setPaused();
     }
+    /**
+     * calls the pongController to resume the game
+     */
     public void resumeGame(){
         pongController.resume();
     }
+    /**
+     * calls the pongController to reset the game
+     */
     public void resetGame(){
         pongController.reset();
     }
@@ -171,5 +184,46 @@ public class MenuListener {
             }
             pongController.resume();
         });
+    }
+    /**
+     * saves the game instance into a file
+     * it does save the game
+     */
+    public void saveState(){
+        try{
+            File saveFile = new File("src/main/dataBase/data.ser");
+            if(saveFile.createNewFile()){
+                System.out.println("New file created");
+
+            }
+            else{
+                System.out.println("file already exists");
+            }
+            Serializer.saveGame(game, saveFile);
+            System.out.println("Score is " + game.getP1Score() + "/" +game.getP2Score());
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+    }
+    /**
+     * loads a game instance from a file
+     * it is broken
+     */
+    public void loadState(){
+        try{
+            File loadFile = new File("src/main/dataBase/data.ser");
+            Game loadGame = Serializer.loadGame(loadFile);
+            if(loadGame != null){
+                this.game = loadGame;
+                pongController.setGame(game);
+                System.out.println("Score is " + game.getP1Score() + "/" +game.getP2Score());
+            }
+            else{
+                System.out.println("not correctly loaded");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

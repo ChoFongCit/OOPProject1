@@ -15,10 +15,23 @@ import javafx.scene.paint.Color;
 import javafx.scene.canvas.GraphicsContext;
 
 import java.io.Serializable;
-
+/**
+ * This class represents a player and its racket
+ */
 public class Player implements Serializable {
+    /**
+     * represents the coordinates and properties of player
+     */
     private double x,y,width, height, movement;
 
+    /**
+     * constructs a player instance
+     *
+     * @param x,y coordinates of player
+     * @param width,height width and height of player
+     * @param dy rate of movement of player
+     * @return an instance of player
+     */
     public Player(double x, double y, double width, double height, double dy){
         this.x = x;
         this.y = y;
@@ -42,21 +55,40 @@ public class Player implements Serializable {
     public double getHeight() {
         return height;
     }
-
+    /**
+     * draws itself
+     *
+     * @param gc GraphicsContext
+     * @return true if goal
+     */
     public void draw(GraphicsContext gc){
         gc.setFill(Color.YELLOWGREEN);
         gc.fillRect(x,y,width,height);
     }
+    /**
+     * updates player coordinates
+     *
+     * @param x,y new coordinates of player
+     */
     public void setUpdate(double x, double y){
         this.x = x;
         this.y = y;
     }
+    /**
+     * moves racket up by movement
+     */
     public void upMove(){
         this.y += -movement;
     }
+    /**
+     * moves racket down by movement
+     */
     public void downMove(){
         this.y += movement;
     }
+    /**
+     * resets coordinates to start of game
+     */
     public void resetPos(double y){
         this.y = y;
     }

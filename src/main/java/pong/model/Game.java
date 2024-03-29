@@ -1,7 +1,9 @@
 package pong.model;
 
 import java.io.Serializable;
-
+/**
+ * Game class represents the model of the game
+ */
 public class Game implements Serializable {
     private int p1Score;
     private int p2Score;
@@ -12,7 +14,6 @@ public class Game implements Serializable {
     private String p2Name;
     private Player player1;
     private Player player2;
-    private int bounceIncrease;
     private int scorelimit = 3; //by default =3
     public Game(Ball ball, Player player1, Player player2){
 
@@ -75,6 +76,9 @@ public class Game implements Serializable {
         return player2;
     }
 
+    /**
+     * updates the game properties and checks collision of ball
+     */
     public void updateBallGame(double windowWidth, double windowHeight) {
         ball.ballUpdate(windowWidth, windowHeight);
         this.windowHeight = windowHeight;
@@ -82,6 +86,10 @@ public class Game implements Serializable {
         ball.checkRacketCollisionP1(player1.getX(), player1.getY(), player1.getWidth(), player1.getHeight());
         ball.checkRacketCollisionP2(player2.getX(), player2.getY(), player2.getWidth(), player2.getHeight());
     }
+    /**
+     * checks if the ball has gone in a goal
+     * @returns 1 if player 1 goal, 2 if player 2 goal
+     */
     public int checkGoal(){
         int side = 0;
         if(ball.checkP1Goal(player2.getX(), player2.getWidth())){
@@ -102,6 +110,10 @@ public class Game implements Serializable {
         }
         return side;
     }
+    /**
+     * checks if score has reached score limit
+     * @returns 1 if player 1 reaches limit, 2 if player 2 reaches limit
+     */
     public int checkEndGame(){
         int side = 0;
         if(p1Score>=scorelimit){
@@ -114,6 +126,9 @@ public class Game implements Serializable {
         }
         return side;
     }
+    /**
+     * resets game properties and model positions
+     */
     public void resetGame(){
         p1Score = 0;
         p2Score = 0;

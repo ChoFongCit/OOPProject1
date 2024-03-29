@@ -39,7 +39,6 @@ public class main extends Application {
             MenuList options = new MenuList(menuListener);
             BorderPane stem = new BorderPane();
             stage.setResizable(true);
-
             Scene scene = new Scene(stem, WIDTH, HEIGHT);
 
             KeyboardListener keyboardListener = new KeyboardListener(game,canvas);
