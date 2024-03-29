@@ -14,16 +14,24 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Label;
 import javafx.scene.shape.*;
-public class Ball {
+
+import java.io.Serializable;
+
+public class Ball implements Serializable {
 
 
-    private double x, y, dx, dy, radius;
+    private double x, y, dx, dy, radius, baseDx,baseDy;
+    private int bounce = 2;
+    private int bounceCount = 0;
+
     public Ball(double x, double y, double radius, double dx, double dy){
         this.x = x;
         this.y = y;
         this.radius = radius;
         this.dx = dx;
         this.dy = dy;
+        baseDx = dx;
+        baseDy = dy;
     }
     public void setSize(int change){
         radius+=change;
@@ -53,16 +61,46 @@ public class Ball {
         return y;
     }
 
+    public void setBounce(int bounce) {
+        this.bounce = bounce;
+    }
+    public void resetSpd(){
+        dx = baseDx;
+        dy = baseDy;
+    }
+    public void resetSpd(double spd){
+        dx  = spd;
+        dy = spd;
+        baseDx = spd;
+        baseDy = spd;
+    }
 
     public void setDy(double dy) {this.dy = dy;}
+
+    public double getDx() {
+        return dx;
+    }
+
     public void checkRacketCollisionP1(double player1X, double player1Y, double player1W, double player1H){
         if((x-(radius/2)) <=  player1X +player1W && ((y<=(player1Y+(player1H)))&& (y>=(player1Y)))){
             this.dx *= -1;
+            increaseSpd();
         }
     }
     public void checkRacketCollisionP2(double player2X, double player2Y, double player2W, double player2H){
         if((x+(radius/2)) >=  player2X - player2W && ((y<=(player2Y+(player2H)))&& (y>=(player2Y)))){
             this.dx *= -1;
+            increaseSpd();
+        }
+    }
+    public void increaseSpd(){
+        if(bounceCount >= bounce){
+            dx *= 1.25;
+            dy *=1.25;
+            bounceCount=0;
+        }
+        else{
+            bounceCount++;
         }
     }
     public boolean checkP1Goal(double player2X, double player2W){

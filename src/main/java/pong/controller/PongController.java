@@ -34,30 +34,30 @@ public class PongController implements Runnable {
             }
             try {
                 Thread.sleep(10);
-                switch(game.checkEndGame()){
-                    case 1:
-                        view.winMessage(game.getP1Name());
-                        setPaused();
-                        reset();
-                        break;
-                    case 2:
-                        view.winMessage(game.getP2Name());
-                        setPaused();
-                        reset();
-                        break;
-                }
+
                 switch (game.checkGoal()) {
                     case 1:
                         scoreMessage = game.getP1Name();
+                        if(checkWin()){
+                        }
+                        else{
                         view.ScoreMessage(scoreMessage);
+                    }
                         Thread.sleep(3000);
+
                         break;
                     case 2:
                         scoreMessage = game.getP2Name();
-                        view.ScoreMessage(scoreMessage);
+                        if(checkWin()){
+                        }
+                        else{
+                            view.ScoreMessage(scoreMessage);
+                        }
                         Thread.sleep(3000);
+
                         break;
                 }
+
 
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
@@ -71,6 +71,19 @@ public class PongController implements Runnable {
         synchronized (pauseLock){
            isPaused = true;
         }
+    }
+    public boolean checkWin(){
+        switch(game.checkEndGame()){
+            case 1:
+                view.winMessage(game.getP1Name());
+                setPaused();
+                return true;
+            case 2:
+                view.winMessage(game.getP2Name());
+                setPaused();
+                return true;
+        }
+        return false;
     }
     public void resume(){
         synchronized (pauseLock){

@@ -30,16 +30,6 @@ public class View extends Canvas {
         player1.draw(gc);
         player2.draw(gc);
     }
-    public void drawBall(GraphicsContext gc)
-    {
-        gc.setFill(Color.BLUE);
-        gc.fillOval(getWidth()/2,getHeight()/2,30,30);
-    }
-    public void drawRacket(GraphicsContext gc )
-    {
-        gc.setFill(Color.YELLOW);
-        gc.fillRect(getWidth()-50, getHeight()/2, 30,100);
-    }
     public void drawNames(GraphicsContext gc){
         gc.setFill(Color.WHITE);
         gc.setFont(comic);
@@ -51,11 +41,16 @@ public class View extends Canvas {
     public void drawScore(GraphicsContext gc){
         gc.setFill(Color.WHITE);
         gc.setFont(comic);
-        gc.fillText(game.getP1Score()+"\t\t"+game.getP2Score(),getWidth()/2 -100,50);
+        gc.fillText(game.getP1Score()+"\t\t"+game.getP2Score(),getWidth()/2 -100,80);
     }
     public void drawBackground(GraphicsContext gc){
         gc.setFill(Color.BLACK);
         gc.fillRect(0,0,getWidth(),getHeight());
+    }
+    public void drawScoreLimit(GraphicsContext gc){
+        gc.setFill(Color.WHITE);
+        gc.setFont(comic);
+        gc.fillText("Score limit: "+ game.getScorelimit(), 0,30);
     }
 
     public void updateView(){
@@ -64,22 +59,29 @@ public class View extends Canvas {
         GraphicsContext gc = this.getGraphicsContext2D();
         gc.clearRect(0, 0, this.getWidth(), this.getHeight());
         drawBackground(gc);
+        drawScoreLimit(gc);
         drawScore(gc);
         drawNames(gc);
         ball.draw(gc);
         player1.draw(gc);
         player2.draw(gc);
+        drawSpd();
     }
     public void ScoreMessage(String name){
         GraphicsContext gc = this.getGraphicsContext2D();
         gc.setFill(Color.WHITE);
         gc.setFont(comic);
-        gc.fillText(name +" Scored",getWidth()/2 ,getHeight()/2 - 50);
+        gc.fillText(name +" Scored",getWidth()/2 -40 ,getHeight()/2 - 50);
     }
     public void winMessage(String name){
         GraphicsContext gc = this.getGraphicsContext2D();
         gc.setFill(Color.WHITE);
         gc.setFont(comic);
-        gc.fillText(name + "Wins", getWidth(), getHeight()/2+50);
+        gc.fillText(name + "Wins", getWidth()/2 -40 , getHeight()/2 + 50);
+    }
+    public void drawSpd(){
+        gc.setFill(Color.WHITE);
+        gc.setFont(comic);
+        gc.fillText("BallSpd: "+Math.abs(ball.getDx()), 0, getHeight()-30);
     }
 }

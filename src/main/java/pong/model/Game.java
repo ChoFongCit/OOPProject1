@@ -1,6 +1,8 @@
 package pong.model;
 
-public class Game {
+import java.io.Serializable;
+
+public class Game implements Serializable {
     private int p1Score;
     private int p2Score;
     private Ball ball;
@@ -11,7 +13,7 @@ public class Game {
     private Player player1;
     private Player player2;
     private int bounceIncrease;
-    private int scorelimit = 1; //by default =3
+    private int scorelimit = 3; //by default =3
     public Game(Ball ball, Player player1, Player player2){
 
         p1Score = 0;
@@ -86,7 +88,7 @@ public class Game {
             p1Score++;
             ball.setX(windowWidth/2);
             ball.setY(windowHeight/2);
-            ball.setDx(-1);
+            ball.resetSpd();
             System.out.println("player1goal");
             side = 1;
         }
@@ -94,7 +96,7 @@ public class Game {
             p2Score++;
             ball.setX(windowWidth/2);
             ball.setY(windowHeight/2);
-            ball.setDx(1);
+            ball.resetSpd();
             System.out.println("player2goals");
             side = 2;
         }

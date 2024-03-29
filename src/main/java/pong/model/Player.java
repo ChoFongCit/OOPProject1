@@ -13,7 +13,10 @@ import javafx.scene.control.Label;
 import javafx.scene.shape.*;
 import javafx.scene.paint.Color;
 import javafx.scene.canvas.GraphicsContext;
-public class Player {
+
+import java.io.Serializable;
+
+public class Player implements Serializable {
     private double x,y,width, height, movement;
 
     public Player(double x, double y, double width, double height, double dy){
