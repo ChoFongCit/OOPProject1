@@ -121,4 +121,5 @@ public class Game implements Serializable {
         player1.resetPos((windowHeight/2)- player1.getHeight()/2);
         player2.resetPos((windowHeight/2)- player2.getHeight()/2);
     }
+
 }
