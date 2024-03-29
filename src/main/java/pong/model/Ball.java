@@ -56,7 +56,7 @@ public class Ball {
 
     public void setDy(double dy) {this.dy = dy;}
     public void checkRacketCollisionP1(double player1X, double player1Y, double player1W, double player1H){
-        if(((x-radius/2)) <=  player1X +player1W && ((y<=(player1Y+(player1H)))&& (y>=(player1Y)))){
+        if((x-(radius/2)) <=  player1X +player1W && ((y<=(player1Y+(player1H)))&& (y>=(player1Y)))){
             this.dx *= -1;
         }
     }
@@ -70,5 +70,9 @@ public class Ball {
     }
     public boolean checkP2Goal(double player1X, double player1W){
         return(this.x<= player1X-player1W);
+    }
+    public void resetPos(double windowWidth, double windowHeight){
+        this.x = windowWidth/2;
+        this.y = windowHeight/2;
     }
 }

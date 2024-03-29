@@ -54,5 +54,7 @@ public class Player {
     public void downMove(){
         this.y += movement;
     }
-
+    public void resetPos(double y){
+        this.y = y;
+    }
 }

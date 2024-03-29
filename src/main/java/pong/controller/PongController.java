@@ -3,37 +3,51 @@ package pong.controller;
 import pong.model.Game;
 import pong.view.View;
 
-public class PongController implements Runnable{
+public class PongController implements Runnable {
     private Game game;
     private View view;
-    private volatile boolean isPaused = true;
+    private volatile boolean isPaused = false;
+    private volatile boolean running = true;
     private final Object pauseLock = new Object();
     private String scoreMessage;
-    public PongController(Game game, View view){
+
+    public PongController(Game game, View view) {
         this.game = game;
         this.view = view;
     }
-    public void setPaused(boolean toggle){
-        isPaused = toggle;
-    }
-    @Override
     public void run() {
-//    int counter = 0 ;
-        while(true)
-        {
-            if(isPaused){
-                try{
-
-                    Thread.sleep(1);     //stops for 3 seconds
-
-                }catch (InterruptedException e){
+        while (running) {
+            synchronized (pauseLock) {
+                if (!running) { // Handle the case where the game needs to stop
+                    break;
+                }
+                if (isPaused) {
+                    try {
+                        pauseLock.wait();
+                    } catch (InterruptedException ex) {
+                        break;
+                    }
+                    if (!running) { // Check again if the game is still running after being notified
+                        break;
+                    }
                 }
             }
-            try{
+            try {
                 Thread.sleep(10);
-                switch (game.checkGoal()){
+                switch(game.checkEndGame()){
                     case 1:
-
+                        view.winMessage(game.getP1Name());
+                        setPaused();
+                        reset();
+                        break;
+                    case 2:
+                        view.winMessage(game.getP2Name());
+                        setPaused();
+                        reset();
+                        break;
+                }
+                switch (game.checkGoal()) {
+                    case 1:
                         scoreMessage = game.getP1Name();
                         view.ScoreMessage(scoreMessage);
                         Thread.sleep(3000);
@@ -44,13 +58,37 @@ public class PongController implements Runnable{
                         Thread.sleep(3000);
                         break;
                 }
-            }
-            catch(InterruptedException e){
+
+            } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
 
-            game.updateBallGame(view.getWidth(),view.getHeight());
+            game.updateBallGame(view.getWidth(), view.getHeight());
             view.updateView();
         }
     }
-}
+    public void setPaused() {
+        synchronized (pauseLock){
+           isPaused = true;
+        }
+    }
+    public void resume(){
+        synchronized (pauseLock){
+            isPaused = false;
+            pauseLock.notifyAll();
+        }
+    }
+
+    public void stop(){
+        synchronized (pauseLock){
+            running = false;
+            resume();
+        }
+    }
+    public void reset(){
+        game.resetGame();
+        view.updateView();
+    }
+
+    }
+

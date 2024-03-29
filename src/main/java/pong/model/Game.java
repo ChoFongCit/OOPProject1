@@ -10,8 +10,10 @@ public class Game {
     private String p2Name;
     private Player player1;
     private Player player2;
-    private int scorelimit;
+    private int bounceIncrease;
+    private int scorelimit = 1; //by default =3
     public Game(Ball ball, Player player1, Player player2){
+
         p1Score = 0;
         p2Score =0;
         p1Name = "Player 1";
@@ -55,6 +57,14 @@ public class Game {
         return p2Score;
     }
 
+    public void setP1Score(int p1Score) {
+        this.p1Score = p1Score;
+    }
+
+    public void setP2Score(int p2Score) {
+        this.p2Score = p2Score;
+    }
+
     public Player getPlayer1() {
         return player1;
     }
@@ -89,5 +99,24 @@ public class Game {
             side = 2;
         }
         return side;
+    }
+    public int checkEndGame(){
+        int side = 0;
+        if(p1Score>=scorelimit){
+            System.out.println("player1Wins");
+            side = 1;
+        }
+        else if(p2Score>=scorelimit){
+            System.out.println("player2Wins");
+            side = 2;
+        }
+        return side;
+    }
+    public void resetGame(){
+        p1Score = 0;
+        p2Score = 0;
+        ball.resetPos(windowWidth,windowHeight);
+        player1.resetPos((windowHeight/2)- player1.getHeight()/2);
+        player2.resetPos((windowHeight/2)- player2.getHeight()/2);
     }
 }

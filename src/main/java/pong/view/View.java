@@ -76,4 +76,10 @@ public class View extends Canvas {
         gc.setFont(comic);
         gc.fillText(name +" Scored",getWidth()/2 ,getHeight()/2 - 50);
     }
+    public void winMessage(String name){
+        GraphicsContext gc = this.getGraphicsContext2D();
+        gc.setFill(Color.WHITE);
+        gc.setFont(comic);
+        gc.fillText(name + "Wins", getWidth(), getHeight()/2+50);
+    }
 }
