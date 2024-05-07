@@ -26,6 +26,7 @@ public class MenuList extends MenuBar {
         MenuItem player2Name = new MenuItem("Player2 Name");
         MenuItem save = new MenuItem("save");
         MenuItem load = new MenuItem("load");
+        MenuItem sDB = new MenuItem("StoreDatabase");
 
         MenuListener listen;
     /**
@@ -36,7 +37,7 @@ public class MenuList extends MenuBar {
      */
         public MenuList(MenuListener menuListener){
             super();
-            optionlist.getItems().addAll(about,pause,save,load,resetGame,resume,exitBtn );
+            optionlist.getItems().addAll(about,pause,save,load,sDB,resetGame,resume,exitBtn );
             gameSettings.getItems().addAll(setWinCondition,changeNames,ballSpeed,ballBounce,player1Name,player2Name);
             this.getMenus().addAll(optionlist,gameSettings);
             this.listen = menuListener;
@@ -52,5 +53,6 @@ public class MenuList extends MenuBar {
             player2Name.setOnAction(event -> menuListener.setp2Name());
             save.setOnAction(event -> menuListener.saveState());
             load.setOnAction(event -> menuListener.loadState());
+            sDB.setOnAction(event -> menuListener.storeDatabase());
         }
 }

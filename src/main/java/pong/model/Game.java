@@ -34,6 +34,9 @@ public class Game implements Serializable {
         this.singleTon = game;
     }
     public static synchronized Game getInstance(){
+        if(singleTon==null){
+            singleTon = new Game();
+        }
         return singleTon;
     }
 //    public Object readResolve() throws ObjectStreamException {
@@ -150,24 +153,7 @@ public class Game implements Serializable {
         player1.resetPos((windowHeight/2)- player1.getHeight()/2);
         player2.resetPos((windowHeight/2)- player2.getHeight()/2);
     }
-    public static void saveSingletonInstance(String filename) {
-        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("data.obj"))) {
-            System.out.println(getInstance().getP1Name());
-            out.writeObject(singleTon);
-            System.out.println("Game object serialized successfully.");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void loadSingletonInstance(String filename) {
-        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("data.obj"))) {
-            singleTon = ((Game) in.readObject());
-            System.out.println("Game object deserialized successfully.");
-            System.out.println(getInstance().getP1Name());
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
+    public static void loadGame(Game game){
+        singleTon = game;
     }
 }

@@ -9,7 +9,8 @@ module com.example.demo {
             requires org.kordamp.ikonli.javafx;
             requires org.kordamp.bootstrapfx.core;
             requires com.almasb.fxgl.all;
-    
+    requires java.sql;
+
     opens pong to javafx.fxml;
     exports pong;
     exports pong.controller;

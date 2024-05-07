@@ -198,7 +198,7 @@ public class MenuListener {
             else{
                 System.out.println("file already exists");
             }
-            Game.saveSingletonInstance("data.ser");
+            Serializer.saveSingletonInstance("data.ser");
             System.out.println("Score is " + Game.getInstance().getP1Score() + "/" +Game.getInstance().getP2Score());
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Serialized");
@@ -217,11 +217,15 @@ public class MenuListener {
         pongController.setPaused();
         try{
 //            Serializer.loadGame("data.ser");
-            Game.loadSingletonInstance("data.ser");
+            Serializer.loadSingletonInstance("data.ser");
             System.out.println("Score is " + Game.getInstance().getP1Score() + "/" +Game.getInstance().getP2Score());
         }catch (Exception e){
             e.printStackTrace();
         }
         pongController.resume();
+    }
+    public void storeDatabase(){
+        pongController.setPaused();
+        DataAccess.getInstance().saveDatabase();
     }
 }
