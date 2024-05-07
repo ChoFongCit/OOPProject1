@@ -9,11 +9,10 @@ import java.io.File;
 import java.util.Optional;
 
 public class MenuListener {
-    private Game game;
+
     private PongController pongController;
 
-    public MenuListener(Game game, PongController controller){
-        this.game = game;
+    public MenuListener( PongController controller){
         pongController = controller;
     }
 
@@ -50,7 +49,7 @@ public class MenuListener {
             try {
                 // Safely parse the integer and set the score limit.
                 int scoreLimit = Integer.parseInt(string);
-                game.setScorelimit(scoreLimit);
+                Game.getInstance().setScorelimit(scoreLimit);
             } catch (NumberFormatException e) {
                 // Handle invalid input (not an integer)
                 // Optionally show an error message to the user
@@ -95,7 +94,7 @@ public class MenuListener {
             try {
                 // Safely parse the integer and set the score limit.
                 int bounceLimit = Integer.parseInt(string);
-                game.getBall().setBounce(bounceLimit);
+                Game.getInstance().getBall().setBounce(bounceLimit);
             } catch (NumberFormatException e) {
                 // Handle invalid input (not an integer)
                 // Optionally show an error message to the user
@@ -122,7 +121,7 @@ public class MenuListener {
             try {
                 // Safely parse the double and set the spd limit
                 double spd = Double.parseDouble(string);
-                game.getBall().resetSpd(spd);
+                Game.getInstance().getBall().resetSpd(spd);
             } catch (NumberFormatException e) {
                 // Handle invalid input (not an integer)
                 // Optionally show an error message to the user
@@ -148,7 +147,7 @@ public class MenuListener {
         result.ifPresent(string -> {
             try {
                 // Safely parse the integer and set the score limit.
-                game.setP1Name(string);
+                Game.getInstance().setP1Name(string);
             } catch (Exception e) {
 
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -172,7 +171,7 @@ public class MenuListener {
         result.ifPresent(string -> {
             try {
                 // Safely parse the integer and set the score limit.
-                game.setP2Name(string);
+                Game.getInstance().setP2Name(string);
             } catch (Exception e) {
 
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -190,40 +189,39 @@ public class MenuListener {
      * it does save the game
      */
     public void saveState(){
+        pongController.setPaused();
         try{
-            File saveFile = new File("src/main/dataBase/data.ser");
+            File saveFile = new File("data.ser");
             if(saveFile.createNewFile()){
                 System.out.println("New file created");
-
             }
             else{
                 System.out.println("file already exists");
             }
-            Serializer.saveGame(game, saveFile);
-            System.out.println("Score is " + game.getP1Score() + "/" +game.getP2Score());
+            Game.saveSingletonInstance("data.ser");
+            System.out.println("Score is " + Game.getInstance().getP1Score() + "/" +Game.getInstance().getP2Score());
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Serialized");
+            alert.showAndWait().ifPresent((btnType) -> {
+            });
         }catch(Exception e){
             e.printStackTrace();
         }
-
+    pongController.resume();
     }
     /**
      * loads a game instance from a file
      * it is broken
      */
     public void loadState(){
+        pongController.setPaused();
         try{
-            File loadFile = new File("src/main/dataBase/data.ser");
-            Game loadGame = Serializer.loadGame(loadFile);
-            if(loadGame != null){
-                this.game = loadGame;
-                pongController.setGame(game);
-                System.out.println("Score is " + game.getP1Score() + "/" +game.getP2Score());
-            }
-            else{
-                System.out.println("not correctly loaded");
-            }
+//            Serializer.loadGame("data.ser");
+            Game.loadSingletonInstance("data.ser");
+            System.out.println("Score is " + Game.getInstance().getP1Score() + "/" +Game.getInstance().getP2Score());
         }catch (Exception e){
             e.printStackTrace();
         }
+        pongController.resume();
     }
 }

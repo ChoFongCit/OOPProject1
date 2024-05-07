@@ -7,30 +7,44 @@ import pong.model.Game;
 import pong.view.View;
 
 public class KeyboardListener implements EventHandler<KeyEvent> {
-    private Game game;
     private View view;
+    private boolean pause;
+    private MenuListener menuListener;
 
-    public KeyboardListener(Game game1, View view1){
-        this.game = game1;
+    public KeyboardListener(View view1, MenuListener menuListener){
+
         this.view = view1;
+        pause = false;
+        this.menuListener = menuListener;
     }
 
     @Override
     public void handle(KeyEvent keyEvent) {
         System.out.println(keyEvent);
         KeyCode key = keyEvent.getCode();
-        if(KeyCode.UP.equals(key)){
-            game.getPlayer2().upMove();
+        if(KeyCode.P.equals(key)){
+            pause = !pause;
+            if(pause){
+                menuListener.pauseGame();
+            }
+            else{
+                menuListener.resumeGame();
+            }
         }
-        if(KeyCode.DOWN.equals(key)){
-            game.getPlayer2().downMove();
+        if(!pause) {
+            if (KeyCode.UP.equals(key)) {
+                Game.getInstance().getPlayer2().upMove();
+            }
+            if (KeyCode.DOWN.equals(key)) {
+                Game.getInstance().getPlayer2().downMove();
+            }
+            if (KeyCode.W.equals(key)) {
+                Game.getInstance().getPlayer1().upMove();
+            }
+            if (KeyCode.S.equals(key)) {
+                Game.getInstance().getPlayer1().downMove();
+            }
+            view.updateView();
         }
-        if(KeyCode.W.equals(key)){
-            game.getPlayer1().upMove();
-        }
-        if(KeyCode.S.equals(key)){
-            game.getPlayer1().downMove();
-        }
-        view.updateView();
     }
 }

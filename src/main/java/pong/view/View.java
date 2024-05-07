@@ -10,42 +10,27 @@ import javafx.scene.text.Font;
 
 public class View extends Canvas {
     /**
-     * Player objects to be drawn
-     */
-    private Player player1, player2;
-    /**
-     * Ball objects to be drawn
-     */
-    private Ball ball;
-    /**
-     * Game object
-     */
-    private Game game;
-    /**
      * Font to be used
      */
     private static Font comic = new Font("Comic Sans", 30);
     private GraphicsContext gc;
-
+    private Game game;
     /**
      * Constructs an instance of the View class
      * draws all models
      * @param width width of the class
      * @param height height of the class
      */
-    public View(double width, double height, Game game, Player player1, Player player2) {
+    public View(double width, double height) {
         super(width,height-20);
+        game.getInstance();
         gc = this.getGraphicsContext2D();
         this.drawBackground(gc);
-        this.game = game;
-        this.player1 = game.getPlayer1();
-        this.player2 = game.getPlayer2();
-        ball = game.getBall();
         this.drawScore(gc);
         drawNames(gc);
-        ball.draw(gc);
-        player1.draw(gc);
-        player2.draw(gc);
+        drawBall(gc);
+        drawPlayer1(gc);
+        drawPlayer2(gc);
     }
     /**
      * draws the names of the players
@@ -53,7 +38,7 @@ public class View extends Canvas {
     public void drawNames(GraphicsContext gc){
         gc.setFill(Color.WHITE);
         gc.setFont(comic);
-        gc.fillText(game.getP1Name()+"\t\t"+game.getP2Name(), getWidth()/2 -100,getHeight()/2);
+        gc.fillText(Game.getInstance().getP1Name()+"\t\t"+Game.getInstance().getP2Name(), getWidth()/2 -100,getHeight()/2);
     }
     /**
      * draws the scores of the players
@@ -61,7 +46,26 @@ public class View extends Canvas {
     public void drawScore(GraphicsContext gc){
         gc.setFill(Color.WHITE);
         gc.setFont(comic);
-        gc.fillText(game.getP1Score()+"\t\t"+game.getP2Score(),getWidth()/2 -100,80);
+        gc.fillText(Game.getInstance().getP1Score()+"\t\t"+Game.getInstance().getP2Score(),getWidth()/2 -100,80);
+    }
+
+    /**
+     * draws itself in view
+     *
+     * @param gc GraphicsContext
+
+     */
+    public void drawBall(GraphicsContext gc){
+        gc.setFill(Color.INDIGO);
+        gc.fillOval(Game.getInstance().getBall().getX(), Game.getInstance().getBall().getY(), Game.getInstance().getBall().getRadius(), Game.getInstance().getBall().getRadius());
+    }
+    public void drawPlayer1(GraphicsContext gc){
+        gc.setFill(Color.YELLOWGREEN);
+        gc.fillRect(Game.getInstance().getPlayer1().getX(), Game.getInstance().getPlayer1().getY(),Game.getInstance().getPlayer1().getWidth(),Game.getInstance().getPlayer1().getHeight());
+    }
+    public void drawPlayer2(GraphicsContext gc){
+        gc.setFill(Color.YELLOWGREEN);
+        gc.fillRect(Game.getInstance().getPlayer2().getX(), Game.getInstance().getPlayer2().getY(),Game.getInstance().getPlayer2().getWidth(),Game.getInstance().getPlayer2().getHeight());
     }
     /**
      * draws the background of the canvas
@@ -76,24 +80,24 @@ public class View extends Canvas {
     public void drawScoreLimit(GraphicsContext gc){
         gc.setFill(Color.WHITE);
         gc.setFont(comic);
-        gc.fillText("Score limit: "+ game.getScorelimit(), 0,30);
+        gc.fillText("Score limit: "+ Game.getInstance().getScorelimit(), 0,30);
     }
 
     /**
      * draws all models with the newest attributes
      */
     public void updateView(){
-        player1.setUpdate(30, player1.getY());
-        player2.setUpdate(getWidth()- 50, player2.getY());
+        Game.getInstance().getPlayer1().setUpdate(30, Game.getInstance().getPlayer1().getY());
+        Game.getInstance().getPlayer2().setUpdate(getWidth()- 50, Game.getInstance().getPlayer2().getY());
         GraphicsContext gc = this.getGraphicsContext2D();
         gc.clearRect(0, 0, this.getWidth(), this.getHeight());
         drawBackground(gc);
         drawScoreLimit(gc);
         drawScore(gc);
         drawNames(gc);
-        ball.draw(gc);
-        player1.draw(gc);
-        player2.draw(gc);
+        drawBall(gc);
+        drawPlayer1(gc);
+        drawPlayer2(gc);
         drawSpd();
     }
     /**
@@ -120,6 +124,6 @@ public class View extends Canvas {
     public void drawSpd(){
         gc.setFill(Color.WHITE);
         gc.setFont(comic);
-        gc.fillText("BallSpd: "+Math.abs(ball.getDx()), 0, getHeight()-30);
+        gc.fillText("BallSpd: "+Math.abs(Game.getInstance().getBall().getDx()), 0, getHeight()-30);
     }
 }

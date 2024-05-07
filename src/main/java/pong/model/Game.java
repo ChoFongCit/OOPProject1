@@ -1,31 +1,45 @@
 package pong.model;
 
-import java.io.Serializable;
+
+import java.io.*;
+
 /**
  * Game class represents the model of the game
  */
 public class Game implements Serializable {
+    private final long serialVersionUID = 1L;
+    private static Game singleTon = new Game();
     private int p1Score;
     private int p2Score;
     private Ball ball;
     private double windowWidth;
     private double windowHeight;
+    private double WIDTH = 800;  //Initial width of window
+    private double HEIGHT = 600; //Initial Height of window
     private String p1Name;
     private String p2Name;
-    private Player player1;
-    private Player player2;
+    private  Player player1;
+    private  Player player2;
     private int scorelimit = 3; //by default =3
-    public Game(Ball ball, Player player1, Player player2){
-
+    private Game(){
+        ball = new Ball(WIDTH / 2, HEIGHT / 2, 30, -1, 1);
+        player1 = new Player(30, HEIGHT / 2 - 40, 20, 80, 20);
+        player2 = new Player(WIDTH - 50, HEIGHT/ 2 - 40, 20, 80, 20);
         p1Score = 0;
         p2Score =0;
-        p1Name = "Player 1";
-        p2Name = "Player 2";
-        this.ball = ball;
-        this.player1 = player1;
-        this.player2 =player2;
-
+        p1Name = "JOHN";
+        p2Name = "PRICK";
     }
+    private Game(Game game){
+        this.singleTon = game;
+    }
+    public static synchronized Game getInstance(){
+        return singleTon;
+    }
+//    public Object readResolve() throws ObjectStreamException {
+//        // Ensure that the singleton instance is maintained after deserialization
+//        return getInstance();
+//    }
 
     public void setP1Name(String p1Name) {
         this.p1Name = p1Name;
@@ -136,5 +150,24 @@ public class Game implements Serializable {
         player1.resetPos((windowHeight/2)- player1.getHeight()/2);
         player2.resetPos((windowHeight/2)- player2.getHeight()/2);
     }
+    public static void saveSingletonInstance(String filename) {
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("data.obj"))) {
+            System.out.println(getInstance().getP1Name());
+            out.writeObject(singleTon);
+            System.out.println("Game object serialized successfully.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+    public static void loadSingletonInstance(String filename) {
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("data.obj"))) {
+            singleTon = ((Game) in.readObject());
+            System.out.println("Game object deserialized successfully.");
+            System.out.println(getInstance().getP1Name());
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
 }

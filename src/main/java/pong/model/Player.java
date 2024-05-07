@@ -56,16 +56,6 @@ public class Player implements Serializable {
         return height;
     }
     /**
-     * draws itself
-     *
-     * @param gc GraphicsContext
-     * @return true if goal
-     */
-    public void draw(GraphicsContext gc){
-        gc.setFill(Color.YELLOWGREEN);
-        gc.fillRect(x,y,width,height);
-    }
-    /**
      * updates player coordinates
      *
      * @param x,y new coordinates of player

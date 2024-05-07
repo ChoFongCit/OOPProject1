@@ -1,134 +1,97 @@
 package pong.controller;
 
+import javafx.animation.AnimationTimer;
 import pong.model.Game;
 import pong.view.View;
 
-import java.io.File;
 /**
  * This class controls the game loop and condition checks
  */
-public class PongController implements Runnable {
-    private Game game;
+public class PongController extends AnimationTimer {
     private View view;
     private volatile boolean isPaused = false;
-    private volatile boolean running = true;
-    /**
-     * Object used to synchronize methods to thread
-     */
-    private final Object pauseLock = new Object();
     private String scoreMessage;
+
     /**
-     * Consturcts an instance of the PongController class
-     * @param game game model
+     * Constructs an instance of the PongController class
+     *
      * @param view rendering class
      */
-    public PongController(Game game, View view) {
-        this.game = game;
+    public PongController(View view) {
         this.view = view;
     }
-    public void run() {
-        while (running) {
-            synchronized (pauseLock) {
-                if (!running) { // Handle the case where the game needs to stop
-                    break;
-                }
-                if (isPaused) {
-                    try {
-                        pauseLock.wait();
-                    } catch (InterruptedException ex) {
-                        break;
-                    }
-                    if (!running) { // Check again if the game is still running after being notified
-                        break;
-                    }
-                }
-            }
-            try {
-                Thread.sleep(10);
-                //checks goal and if the player has won or not
-                switch (game.checkGoal()) {
-                    case 1:
-                        scoreMessage = game.getP1Name();
-                        if(checkWin()){
-                        }
-                        else{
-                        view.ScoreMessage(scoreMessage);
-                    }
-                        Thread.sleep(3000);
 
-                        break;
-                    case 2:
-                        scoreMessage = game.getP2Name();
-                        if(checkWin()){
-                        }
-                        else{
+    @Override
+    public void handle(long now) {
+        if (!isPaused) {
+            try {
+                // Check for goals and if the player has won or not
+                switch (Game.getInstance().checkGoal()) {
+                    case 1:
+                        scoreMessage = Game.getInstance().getP1Name();
+                        if (!checkWin()) {
                             view.ScoreMessage(scoreMessage);
                         }
                         Thread.sleep(3000);
-
+                        break;
+                    case 2:
+                        scoreMessage = Game.getInstance().getP2Name();
+                        if (!checkWin()) {
+                            view.ScoreMessage(scoreMessage);
+                        }
+                        Thread.sleep(3000);
                         break;
                 }
 
+                // Update game state and view
+                Game.getInstance().updateBallGame(view.getWidth(), view.getHeight());
+                view.updateView();
 
             } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
             }
-
-            game.updateBallGame(view.getWidth(), view.getHeight());
-            view.updateView();
         }
     }
+
     /**
-     *pauses the game loop
+     * Pauses the game loop
      */
     public void setPaused() {
-        synchronized (pauseLock){
-           isPaused = true;
-        }
+        isPaused = true;
     }
+
     /**
-     * checks if a player has won
+     * Checks if a player has won
+     *
      * @return true when a player has won
      */
-    public boolean checkWin(){
-        switch(game.checkEndGame()){
+    public boolean checkWin() {
+        switch (Game.getInstance().checkEndGame()) {
             case 1:
-                view.winMessage(game.getP1Name());
+                view.winMessage(Game.getInstance().getP1Name());
                 setPaused();
                 return true;
             case 2:
-                view.winMessage(game.getP2Name());
+                view.winMessage(Game.getInstance().getP2Name());
                 setPaused();
                 return true;
         }
         return false;
     }
+
     /**
-     * resumes the game loop
+     * Resumes the game loop
      */
-    public void resume(){
-        synchronized (pauseLock){
-            isPaused = false;
-            pauseLock.notifyAll();
-        }
+    public void resume() {
+        isPaused = false;
     }
 
-    public void stop(){
-        synchronized (pauseLock){
-            running = false;
-            resume();
-        }
-    }
     /**
-     * resets the game instance
+     * Resets the game instance
      */
-    public void reset(){
-        game.resetGame();
+    public void reset() {
+        setPaused();
+        Game.getInstance().resetGame();
         view.updateView();
     }
-
-    public void setGame(Game game) {
-        this.game = game;
-    }
 }
-

@@ -7,22 +7,17 @@ import java.io.*;
  * Attempts to call all serialization methods in the project
  */
 public class Serializer {
-
-    public static void saveGame(Game game,File filename) {
-        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(filename))) {
+    public static synchronized void saveGame(Game game,String filename) {
+        try  {
+            FileOutputStream file = new FileOutputStream(filename);
+            ObjectOutputStream out = new ObjectOutputStream(file);
             out.writeObject(game);
-
+            out.flush();
+            file.close();
+            out.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-            public static Game loadGame(File filename) {
-                try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(filename))) {
-                    return (Game) in.readObject();
-                } catch (IOException | ClassNotFoundException e) {
-                    e.printStackTrace();
-                    return null;
-                }
-            }
         }
 

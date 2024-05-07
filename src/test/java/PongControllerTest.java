@@ -14,9 +14,9 @@ public class PongControllerTest {
     Ball ball = new Ball(WIDTH / 2, HEIGHT / 2, 30, -1, 1);
     Player player1 = new Player(30,HEIGHT / 2 - 40, 20, 80, 10);
     Player player2 = new Player(WIDTH - 50, HEIGHT/ 2 - 40, 20, 80, 10);
-    Game game = new Game(ball, player1, player2);
-    View canvas = new View(WIDTH, HEIGHT,game, player1, player2);
-    PongController controller = new PongController(game,canvas);
+    Game game = Game.getInstance();
+    View canvas = new View(WIDTH, HEIGHT);
+    PongController controller = new PongController(canvas);
 
     @Before
     public void initialise(){

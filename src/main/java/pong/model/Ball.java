@@ -64,16 +64,7 @@ public class Ball implements Serializable {
     public void setRadius(double radius){
         this.radius = radius;
     }
-    /**
-     * draws itself in view
-     *
-     * @param gc GraphicsContext
 
-     */
-    public void draw(GraphicsContext gc){
-        gc.setFill(Color.INDIGO);
-        gc.fillOval(x,y,radius, radius);
-    }
     /**
      * updates ball position according to its dx and dy values
      *
@@ -230,5 +221,9 @@ public class Ball implements Serializable {
     public void resetPos(double windowWidth, double windowHeight){
         this.x = windowWidth/2;
         this.y = windowHeight/2;
+    }
+
+    public double getRadius() {
+        return radius;
     }
 }
