@@ -21,7 +21,6 @@ public class Serializer {
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("data.obj"))) {
              Game.loadGame(((Game) in.readObject()));
             System.out.println("Game object deserialized successfully.");
-            System.out.println(Game.getInstance().getP1Name());
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }

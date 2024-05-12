@@ -8,7 +8,7 @@ import java.io.*;
  */
 public class Game implements Serializable {
     private final long serialVersionUID = 1L;
-    private static Game singleTon = new Game();
+    private static Game singleTon = null;
     private int p1Score;
     private int p2Score;
     private Ball ball;
@@ -17,11 +17,12 @@ public class Game implements Serializable {
     private double WIDTH = 800;  //Initial width of window
     private double HEIGHT = 600; //Initial Height of window
     private String p1Name;
+    private String name = "Australian Open";
     private String p2Name;
     private  Player player1;
     private  Player player2;
     private int scorelimit = 3; //by default =3
-    private Game(){
+    public Game(){
         ball = new Ball(WIDTH / 2, HEIGHT / 2, 30, -1, 1);
         player1 = new Player(30, HEIGHT / 2 - 40, 20, 80, 20);
         player2 = new Player(WIDTH - 50, HEIGHT/ 2 - 40, 20, 80, 20);
@@ -31,7 +32,7 @@ public class Game implements Serializable {
         p2Name = "PRICK";
     }
     private Game(Game game){
-        this.singleTon = game;
+        singleTon = game;
     }
     public static synchronized Game getInstance(){
         if(singleTon==null){
@@ -50,6 +51,13 @@ public class Game implements Serializable {
 
     public void setP2Name(String p2Name) {
         this.p2Name = p2Name;
+    }
+    public String getName(){
+        return this.name ;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Ball getBall() {

@@ -23,7 +23,7 @@ public class KeyboardListener implements EventHandler<KeyEvent> {
         System.out.println(keyEvent);
         KeyCode key = keyEvent.getCode();
         if(KeyCode.P.equals(key)){
-            pause = !pause;
+            togglePause();
             if(pause){
                 menuListener.pauseGame();
             }
@@ -46,5 +46,8 @@ public class KeyboardListener implements EventHandler<KeyEvent> {
             }
             view.updateView();
         }
+    }
+    public void togglePause(){
+        this.pause = !this.pause;
     }
 }

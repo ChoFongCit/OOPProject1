@@ -1,6 +1,5 @@
 package pong.controller;
 
-import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextInputDialog;
 import pong.model.Game;
@@ -11,8 +10,9 @@ import java.util.Optional;
 public class MenuListener {
 
     private PongController pongController;
+    private KeyboardListener keyboardListener;
 
-    public MenuListener( PongController controller){
+    public MenuListener(PongController controller ){
         pongController = controller;
     }
 
@@ -211,7 +211,6 @@ public class MenuListener {
     }
     /**
      * loads a game instance from a file
-     * it is broken
      */
     public void loadState(){
         pongController.setPaused();
@@ -226,6 +225,20 @@ public class MenuListener {
     }
     public void storeDatabase(){
         pongController.setPaused();
-        DataAccess.getInstance().saveDatabase();
+        try{
+            DatabaseManager.saveGame();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        pongController.resume();
+    }
+    public void loadDatabase(){
+        pongController.setPaused();
+        try{
+            DatabaseManager.getGame("Australian Open");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        pongController.resume();
     }
 }
