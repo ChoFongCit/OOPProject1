@@ -1,8 +1,6 @@
 package pong.view;
 
-import pong.model.Ball;
 import pong.model.Game;
-import pong.model.Player;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -14,7 +12,6 @@ public class View extends Canvas {
      */
     private static Font comic = new Font("Comic Sans", 30);
     private GraphicsContext gc;
-    private Game game;
     /**
      * Constructs an instance of the View class
      * draws all models
@@ -23,7 +20,6 @@ public class View extends Canvas {
      */
     public View(double width, double height) {
         super(width,height-20);
-        game.getInstance();
         gc = this.getGraphicsContext2D();
         this.drawBackground(gc);
         this.drawScore(gc);
@@ -50,19 +46,27 @@ public class View extends Canvas {
     }
 
     /**
-     * draws itself in view
-     *
-     * @param gc GraphicsContext
-
+     * Draws ball object
+     * @param gc
      */
     public void drawBall(GraphicsContext gc){
         gc.setFill(Color.INDIGO);
         gc.fillOval(Game.getInstance().getBall().getX(), Game.getInstance().getBall().getY(), Game.getInstance().getBall().getRadius(), Game.getInstance().getBall().getRadius());
     }
+
+    /**
+     * Draws player1 racket
+     * @param gc
+     */
     public void drawPlayer1(GraphicsContext gc){
         gc.setFill(Color.YELLOWGREEN);
         gc.fillRect(Game.getInstance().getPlayer1().getX(), Game.getInstance().getPlayer1().getY(),Game.getInstance().getPlayer1().getWidth(),Game.getInstance().getPlayer1().getHeight());
     }
+
+    /**
+     * draws player 2 racket
+     * @param gc
+     */
     public void drawPlayer2(GraphicsContext gc){
         gc.setFill(Color.YELLOWGREEN);
         gc.fillRect(Game.getInstance().getPlayer2().getX(), Game.getInstance().getPlayer2().getY(),Game.getInstance().getPlayer2().getWidth(),Game.getInstance().getPlayer2().getHeight());

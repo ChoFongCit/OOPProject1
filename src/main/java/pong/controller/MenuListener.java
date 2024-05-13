@@ -10,7 +10,6 @@ import java.util.Optional;
 public class MenuListener {
 
     private PongController pongController;
-    private KeyboardListener keyboardListener;
 
     public MenuListener(PongController controller ){
         pongController = controller;
@@ -198,7 +197,7 @@ public class MenuListener {
             else{
                 System.out.println("file already exists");
             }
-            Serializer.saveSingletonInstance("data.ser");
+            Serializer.saveSingletonInstance();
             System.out.println("Score is " + Game.getInstance().getP1Score() + "/" +Game.getInstance().getP2Score());
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Serialized");
@@ -216,13 +215,17 @@ public class MenuListener {
         pongController.setPaused();
         try{
 //            Serializer.loadGame("data.ser");
-            Serializer.loadSingletonInstance("data.ser");
+            Serializer.loadSingletonInstance();
             System.out.println("Score is " + Game.getInstance().getP1Score() + "/" +Game.getInstance().getP2Score());
         }catch (Exception e){
             e.printStackTrace();
         }
         pongController.resume();
     }
+
+    /**
+     * Stores game information to a sql database
+     */
     public void storeDatabase(){
         pongController.setPaused();
         try{
@@ -232,10 +235,14 @@ public class MenuListener {
         }
         pongController.resume();
     }
+
+    /**
+     * Construct game from a sql database
+     */
     public void loadDatabase(){
         pongController.setPaused();
         try{
-            DatabaseManager.getGame("Australian Open");
+            DatabaseManager.getGame();
         }catch(Exception e){
             e.printStackTrace();
         }

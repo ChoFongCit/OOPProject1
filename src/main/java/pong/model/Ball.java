@@ -129,7 +129,6 @@ public class Ball implements Serializable {
      * sets dx and dy to spd
      *
      * @param spd the x-coordinate of ball
-
      */
     public void resetSpd(double spd){
         dx  = spd;
@@ -213,10 +212,8 @@ public class Ball implements Serializable {
     }
     /**
      * resets ball position to center of window
-     *
      * @param windowWidth width  of window
      * @param windowHeight height of window
-
      */
     public void resetPos(double windowWidth, double windowHeight){
         this.x = windowWidth/2;

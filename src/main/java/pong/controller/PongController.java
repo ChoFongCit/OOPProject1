@@ -14,13 +14,16 @@ public class PongController extends AnimationTimer {
 
     /**
      * Constructs an instance of the PongController class
-     *
      * @param view rendering class
      */
     public PongController(View view) {
         this.view = view;
     }
 
+    /**
+     * The running game loop which uses Animation Timer
+     * @param now
+     */
     @Override
     public void handle(long now) {
         if (!isPaused) {

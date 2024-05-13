@@ -1,13 +1,17 @@
 package pong.controller;
 
 import pong.Builder.GameBuilder;
-import pong.controller.DatabaseConnector;
 import pong.model.Game;
 
 import java.sql.*;
 
 public class DatabaseManager {
-    public static Game getGame(String name) throws ClassNotFoundException, SQLException{
+    /**
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     * Replaces the current game instance with a new game instance built from data from SQL
+     */
+    public static void getGame() throws ClassNotFoundException, SQLException{
         Connection connection = DatabaseConnector.getConnection();
         Statement statement = connection.createStatement();
         String sql = "SELECT * FROM game ORDER BY id DESC LIMIT 1";
@@ -23,12 +27,15 @@ public class DatabaseManager {
                             withPlayer2Name(rs.getString("player2Name")).
                             withPlayer2Score(rs.getInt("player2Score")).
                             withTarget(rs.getInt("target"));
-                    Game game = builder.build();
                     Game.loadGame(builder.build());
-                    return game;
         }
-        return null;
     }
+
+    /**
+     * Saves game information to SQL server
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
     public static void saveGame() throws SQLException, ClassNotFoundException {
         Game game = Game.getInstance();
         Connection connection = DatabaseConnector.getConnection();

@@ -1,7 +1,6 @@
 package pong.Builder;
 
 import pong.model.Game;
-import pong.model.Player;
 
 public class GameBuilder {
     private String player1Name;

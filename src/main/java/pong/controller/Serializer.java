@@ -4,10 +4,10 @@ import pong.model.Game;
 
 import java.io.*;
 /**
- * Attempts to call all serialization methods in the project
+ * Serializes entire Game object to a file, data.obj
  */
 public class Serializer {
-    public static void saveSingletonInstance(String filename) {
+    public static void saveSingletonInstance() {
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("data.obj"))) {
             System.out.println(Game.getInstance().getP1Name());
             out.writeObject(Game.getInstance());
@@ -17,7 +17,10 @@ public class Serializer {
         }
     }
 
-    public static void loadSingletonInstance(String filename) {
+    /**
+     * Deserializes object from data.obj, cast it to Game, and load it as the current game instance
+     */
+    public static void loadSingletonInstance() {
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("data.obj"))) {
              Game.loadGame(((Game) in.readObject()));
             System.out.println("Game object deserialized successfully.");

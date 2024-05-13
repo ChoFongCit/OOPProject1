@@ -11,13 +11,21 @@ public class KeyboardListener implements EventHandler<KeyEvent> {
     private boolean pause;
     private MenuListener menuListener;
 
+    /**
+     * Contructs a new keyboardListner instance
+     * @param view1
+     * @param menuListener
+     */
     public KeyboardListener(View view1, MenuListener menuListener){
-
         this.view = view1;
         pause = false;
         this.menuListener = menuListener;
     }
 
+    /**
+     * Handles key inputs, P for toggle pausing, WD and Arrow keys(UP, DOWN) for player movement
+     * @param keyEvent
+     */
     @Override
     public void handle(KeyEvent keyEvent) {
         System.out.println(keyEvent);

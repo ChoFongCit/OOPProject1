@@ -7,7 +7,6 @@ import java.io.*;
  * Game class represents the model of the game
  */
 public class Game implements Serializable {
-    private final long serialVersionUID = 1L;
     private static Game singleTon = null;
     private int p1Score;
     private int p2Score;
@@ -31,19 +30,12 @@ public class Game implements Serializable {
         p1Name = "JOHN";
         p2Name = "PRICK";
     }
-    private Game(Game game){
-        singleTon = game;
-    }
     public static synchronized Game getInstance(){
         if(singleTon==null){
             singleTon = new Game();
         }
         return singleTon;
     }
-//    public Object readResolve() throws ObjectStreamException {
-//        // Ensure that the singleton instance is maintained after deserialization
-//        return getInstance();
-//    }
 
     public void setP1Name(String p1Name) {
         this.p1Name = p1Name;
@@ -161,6 +153,10 @@ public class Game implements Serializable {
         player1.resetPos((windowHeight/2)- player1.getHeight()/2);
         player2.resetPos((windowHeight/2)- player2.getHeight()/2);
     }
+    /**
+     * Replaces the game instance
+     * @param game The new game instance
+     */
     public static void loadGame(Game game){
         singleTon = game;
     }
